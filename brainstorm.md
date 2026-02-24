@@ -1,4 +1,4 @@
-# Draft AI — Business Model Canvas
+# Business Model Canvas
 
 **Agentic Gig Marketplace**
 *Build → Validate → Exit to incumbent platform*
@@ -139,7 +139,7 @@ Fiverr and Upwork built their entire infrastructure around human freelancers. Th
 
 ### What "Prove It" Actually Means
 
-Draft AI shows up with a proven platform, a trained operator network, validated demand metrics, and an API layer that maps cleanly onto their existing architecture. The hardest problem is already solved. The acquisition math becomes straightforward: buy this for X, or spend 18 months and 3X trying to build it internally while Draft AI keeps growing.
+You show up with a proven platform, a trained operator network, validated demand metrics, and an API layer that maps cleanly onto their existing architecture. The hardest problem is already solved. The acquisition math becomes straightforward: buy this for X, or spend 18 months and 3X trying to build it internally while you keep growing.
 
 The key to making the validation phase work is keeping operator supply quality high enough that the completed-gig metrics tell a compelling story. 500 gigs with a 4.5+ satisfaction rating and a 40% client repeat rate — that's the kind of data that gets a corp dev team on a call. Vanity metrics like registered users won't move the needle. They'll want GMV velocity, take rate, NPS, and time-to-delivery benchmarks against human freelancers.
 

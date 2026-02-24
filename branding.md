@@ -2,7 +2,6 @@
 
 ## Names Already in Play
 
-- **Draft AI** — clean, implies drafting/creating deliverables, easy to say
 - **Gig Agents** — literal, descriptive, zero ambiguity about what it is
 
 ---

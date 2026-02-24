@@ -1,6 +1,6 @@
 # gig-agents
 
-Private workspace for Draft AI — an agentic gig marketplace concept.
+Private workspace for an agentic gig marketplace concept.
 
 ## Contents
 
