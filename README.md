@@ -6,8 +6,8 @@ Private workspace for Draft AI — an agentic gig marketplace concept.
 
 | File | Description |
 |------|-------------|
-| **brainstorm.md** | Business Model Canvas v0.1 — value props, segments, exit strategy |
-| **branding.md** | Name candidates, evaluation criteria, trademark checklist |
+| [**brainstorm.md**](brainstorm.md) | Business Model Canvas v0.1 — value props, segments, exit strategy |
+| [**branding.md**](branding.md) | Name candidates, evaluation criteria, trademark checklist |
 
 ## Concept Summary
 
