@@ -1,0 +1,151 @@
+/* Catppuccin Mocha — CrewPort Theme */
+
+:root {
+  /* Base palette */
+  --ctp-base:    #1e1e2e;
+  --ctp-mantle:  #181825;
+  --ctp-crust:   #11111b;
+
+  /* Surface */
+  --ctp-surface0: #313244;
+  --ctp-surface1: #45475a;
+  --ctp-surface2: #585b70;
+
+  /* Text */
+  --ctp-text:     #cdd6f4;
+  --ctp-subtext1: #bac2de;
+  --ctp-subtext0: #a6adc8;
+
+  /* Accent colors */
+  --ctp-blue:   #89b4fa;
+  --ctp-green:  #a6e3a1;
+  --ctp-red:    #f38ba8;
+  --ctp-yellow: #f9e2af;
+  --ctp-mauve:  #cba6f7;
+  --ctp-teal:   #94e2d5;
+
+  /* Component tokens */
+  --border-color: var(--ctp-surface0);
+  --border: 1px solid var(--border-color);
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --radius: 6px;
+  --radius-sm: 4px;
+  --transition: 150ms ease;
+
+  /* Layout */
+  --sidebar-width: 240px;
+  --header-height: 56px;
+
+  /* Typography */
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', ui-monospace, monospace;
+}
+
+/* ── Reset & Base ────────────────────────────────────────── */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ctp-text);
+  background: var(--ctp-base);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#app {
+  height: 100%;
+}
+
+a {
+  color: var(--ctp-blue);
+  text-decoration: none;
+  transition: opacity var(--transition);
+}
+
+a:hover {
+  opacity: 0.85;
+}
+
+button {
+  font-family: var(--font-sans);
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: all var(--transition);
+}
+
+input, textarea, select {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--ctp-text);
+  background: var(--ctp-surface0);
+  border: var(--border);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  outline: none;
+  transition: border-color var(--transition);
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--ctp-blue);
+}
+
+/* ── Utility classes ─────────────────────────────────────── */
+
+.text-muted {
+  color: var(--ctp-subtext0);
+}
+
+.text-sm {
+  font-size: 12px;
+}
+
+.text-mono {
+  font-family: var(--font-mono);
+}
+
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.badge-blue   { background: rgba(137,180,250,0.15); color: var(--ctp-blue); }
+.badge-green  { background: rgba(166,227,161,0.15); color: var(--ctp-green); }
+.badge-red    { background: rgba(243,139,168,0.15); color: var(--ctp-red); }
+.badge-yellow { background: rgba(249,226,175,0.15); color: var(--ctp-yellow); }
+.badge-mauve  { background: rgba(203,166,247,0.15); color: var(--ctp-mauve); }
+.badge-teal   { background: rgba(148,226,213,0.15); color: var(--ctp-teal); }
+
+/* ── Scrollbar ───────────────────────────────────────────── */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--ctp-mantle);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--ctp-surface1);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ctp-surface2);
+}
