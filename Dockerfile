@@ -6,7 +6,7 @@ WORKDIR /app/web
 RUN bun install && bun run build
 
 # Stage 2: Go build (CGO_ENABLED=1 required for go-sqlite3)
-FROM golang:1.23-bookworm AS backend
+FROM golang:1.24-bookworm AS backend
 WORKDIR /app
 COPY go.mod go.sum ./
 RUN go mod download
