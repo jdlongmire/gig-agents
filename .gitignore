@@ -28,6 +28,11 @@ Thumbs.db
 vendor/
 __pycache__/
 *.pyc
+node_modules/
+web/node_modules/
+
+# Frontend build output (generated)
+web/dist/
 
 # Test
 coverage.out
