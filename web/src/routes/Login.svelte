@@ -523,7 +523,7 @@
     height: 150vh;
     left: -75vh;
     top: calc(50vh - 75vh);
-    opacity: 0.17;
+    opacity: 0.35;
     animation: wheel-rotate 60s linear infinite;
   }
 
@@ -570,7 +570,7 @@
       transform: translate(0, 0);
     }
     8%   {
-      opacity: 0.18;
+      opacity: 0.45;
       transform: translate(
         calc(var(--dx) * 0.12),
         calc(var(--dy) * 0.12)
@@ -578,24 +578,24 @@
     }
     38%  {
       /* Peak — farthest point outward */
-      opacity: 0.16;
+      opacity: 0.38;
       transform: translate(var(--dx), var(--dy));
     }
     55%  {
       /* Arc midpoint — perpendicular curve waypoint for smooth return arc */
-      opacity: 0.13;
+      opacity: 0.30;
       transform: translate(var(--mdx), var(--mdy));
     }
     80%  {
       /* Approaching return dock */
-      opacity: 0.10;
+      opacity: 0.22;
       transform: translate(
         calc(var(--rx) * 0.85 + var(--mdx) * 0.15),
         calc(var(--ry) * 0.85 + var(--mdy) * 0.15)
       );
     }
     92%  {
-      opacity: 0.06;
+      opacity: 0.12;
       transform: translate(var(--rx), var(--ry));
     }
     100% {
