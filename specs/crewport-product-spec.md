@@ -1186,7 +1186,7 @@ Work involving data collection, transformation, analysis, or visualization.
 **Form fields**:
 - Source URLs or API endpoints
 - Data fields to collect
-- Output format (CSV, JSON, Parquet, SQLite, PostgreSQL dump)
+- Output format (CSV, JSON, Parquet, SQLite)
 - Scope (how many records, how many pages, depth)
 - Update frequency (one-time vs recurring — recurring requires separate arrangement)
 
@@ -2169,23 +2169,27 @@ Smart contract security is non-negotiable — bugs in the escrow logic have dire
 
 ### 15.2 Database
 
-**Primary store**: PostgreSQL 16+
-**Why not SQLite for MVP**: The marketplace has multi-writer requirements (multiple shells claiming contracts simultaneously need serializable isolation). PostgreSQL's `SELECT FOR UPDATE SKIP LOCKED` is the right tool for the contract claiming queue.
+**Primary store**: SQLite (WAL mode) + Litestream for continuous replication
+**Why SQLite**: Single-node deployment on Hermit means no multi-server write contention. SQLite in WAL mode handles concurrent reads efficiently and serializes writes through Go's `database/sql` connection pool. Litestream provides continuous streaming backup to S3-compatible storage (MinIO on Hermit), giving us point-in-time recovery without the operational overhead of running a separate database server. This is the same pattern Rhode uses — proven on the Hermit stack.
+
+**Concurrency model**: Contract claiming uses `BEGIN IMMEDIATE` transactions with application-level retry on `SQLITE_BUSY`. At MVP volumes (<1,000 contracts/month), write serialization is not a bottleneck. If write contention becomes measurable, the path forward is sharding by contract class or migrating to Turso (libSQL with embedded replicas) — not Postgres.
 
 **Key tables**:
 - `accounts` (clients and operators, discriminated union)
 - `operators` (operator-specific: KYC status, Stripe Connect ID, wallet address)
 - `shells` (enrollment URL, webhook secret hash, status, `max_concurrent_contracts`)
 - `capabilities` (shell → contract class mapping with SLA and pricing)
-- `contracts` (class, title, requirements JSONB, status, client_id, claiming_shell_id, escrow_credits, smart_contract_address)
-- `deliveries` (contract_id, shell_id, artifacts JSONB, revision_number, operator_qa_token)
+- `contracts` (class, title, requirements JSON, status, client_id, claiming_shell_id, escrow_credits, smart_contract_address)
+- `deliveries` (contract_id, shell_id, artifacts JSON, revision_number, operator_qa_token)
 - `credit_ledger` (append-only ledger — every credit mutation is a row)
 - `chain_events` (log of all smart contract events received with tx hash, block, timestamp)
 - `reputation_scores` (current composite + component breakdown per shell, recalculated daily)
 - `disputes` (contract_id, filing_party, statements, resolution, resolver)
 - `reviews` (client → shell star rating + comment)
 
-**Migrations**: `golang-migrate` with up/down migrations. Schema versioned in the repo.
+**Migrations**: `golang-migrate` with up/down SQL migrations. Schema versioned in the repo.
+
+**Backup**: Litestream replicates WAL frames to S3 every 10 seconds. Restore is a single `litestream restore` command. Full backup also runs nightly via cron as a safety net.
 
 ### 15.3 Smart Contract Layer
 
@@ -2235,7 +2239,7 @@ Smart contract security is non-negotiable — bugs in the escrow logic have dire
 
 **Production topology**:
 - Go services as systemd units or K3s pods (K3s preferred for horizontal scaling)
-- PostgreSQL via K3s persistent volume or managed (Supabase, Neon, or RDS for cloud deployment)
+- SQLite database file on persistent volume + Litestream replicating to S3-compatible storage (MinIO on Hermit, Tigris or S3 for cloud)
 - Object storage: S3-compatible (MinIO on Hermit for self-hosted, Tigris or S3 for cloud)
 - Email: Resend or Postmark (transactional email — not self-hosted)
 - TLS: Caddy (already in Hermit stack)
@@ -2245,7 +2249,7 @@ Smart contract security is non-negotiable — bugs in the escrow logic have dire
 - 2 vCPU, 4GB RAM for API server
 - 1 vCPU, 2GB RAM for workers
 - 1 vCPU, 1GB RAM for chain-listener
-- PostgreSQL: 2 vCPU, 4GB RAM, 50GB SSD
+- SQLite + Litestream: no additional compute (embedded in API server), 10GB SSD for database file
 - Object storage: 10GB initial
 
 This fits comfortably on a single Hermit node.

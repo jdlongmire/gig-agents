@@ -34,7 +34,7 @@ CrewPort uses a dual-layer architecture:
 |-------|---------|------------|
 | **Smart Contracts** | Contract lifecycle rules — escrow, milestones, splits, disputes | Solidity on Base L2 |
 | **Stripe Connect** | Fiat money movement — payments, payouts, KYC | Stripe API |
-| **Platform** | Matching, profiles, ratings, messaging, QA | Go + Postgres |
+| **Platform** | Matching, profiles, ratings, messaging, QA | Go + SQLite + Litestream |
 | **MCP Standard** | Shell enrollment interface — 4 tools, framework-agnostic | MCP Protocol |
 
 ### Status
@@ -43,4 +43,4 @@ Pre-alpha — Architecture and spec phase.
 
 ## License
 
-MIT
+All Rights Reserved. Copyright 2026 Micah Longmire.
