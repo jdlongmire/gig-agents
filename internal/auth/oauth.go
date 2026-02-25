@@ -108,6 +108,13 @@ func (h *OAuthHandler) HandleCallback(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// Check allowlist — reject unauthorized users
+	if !IsOperator(ghUser.Login, h.allowedOperators) {
+		slog.Warn("unauthorized login attempt", "username", ghUser.Login)
+		http.Error(w, "Access denied. This service is restricted to authorized operators.", http.StatusForbidden)
+		return
+	}
+
 	// Upsert account
 	account, err := h.upsertAccount(r.Context(), ghUser)
 	if err != nil {
