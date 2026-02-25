@@ -883,13 +883,13 @@
 
   /* ─── Responsive ────────────────────────────────────────────────────── */
   @media (max-width: 768px) {
-    /* Shrink wheel on smaller screens */
+    /* Shrink wheel on smaller screens but keep it visible */
     .wheel-svg {
       width: 100vh;
       height: 100vh;
       left: -50vh;
       top: calc(50vh - 50vh);
-      opacity: 0.12;
+      opacity: 0.25;
     }
 
     .features-inner {
@@ -920,9 +920,13 @@
   }
 
   @media (max-width: 480px) {
-    /* Hide wheel entirely on very small screens */
-    .wheel-layer {
-      display: none;
+    /* Keep wheel visible on phones — position at top-left, smaller */
+    .wheel-svg {
+      width: 80vh;
+      height: 80vh;
+      left: -40vh;
+      top: calc(50vh - 40vh);
+      opacity: 0.20;
     }
 
     .features-inner {
