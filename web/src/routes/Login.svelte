@@ -38,6 +38,11 @@
   // Wheel SVG coords: viewBox "0 0 800 800", center (400,400), radius ~320
   // The wheel is rendered at 150vh tall, positioned left:-75vh so center is at x=0
   // In viewport space, wheel center is at left edge. Right half visible.
+  //
+  // ROUND-TRIP ANIMATION:
+  // Each agent flies out to a peak position, then arcs back to a triangle on the
+  // wheel — simulating a deploy cycle. The arc-back is created by intermediate
+  // keyframe waypoints that form a curved path (bezier approximation).
 
   let agents = [];
   let agentId = 0;
@@ -49,29 +54,37 @@
   // We pick from the visible right half: triangles 0 (0°), 1 (60°), 5 (300°) are most visible
   const triangleAngles = [0, 60, 120, 180, 240, 300];
 
-  function spawnDeployment() {
-    // Count existing agents — cap at 12 (up to 3 per event × 4 concurrent events)
-    if (agents.length >= 12) return;
-
-    // Pick a triangle to "activate" — bias toward the visible right half
-    const visibleTriangles = [0, 1, 5]; // 0°, 60°, 300° — on the right side
-    const triIdx = visibleTriangles[Math.floor(Math.random() * visibleTriangles.length)];
-    const triAngleDeg = triangleAngles[triIdx];
-
-    // Flash this triangle
-    activeTriangle = triIdx;
-    setTimeout(() => { activeTriangle = -1; }, 700);
-
-    // Wheel radius in vh: wheel is 150vh so radius = 75vh, use 72vh to stay on visible rim
+  // Compute viewport-space spawn point for a given visible triangle index
+  function triangleSpawnPoint(triIdx) {
     const wheelRadiusVh = 72;
     const triAngleRad = triIdx === 0 ? 0
       : triIdx === 1 ? -60 * (Math.PI / 180)
       : triIdx === 5 ? 60 * (Math.PI / 180)
-      : triAngleDeg * (Math.PI / 180);
+      : triangleAngles[triIdx] * (Math.PI / 180);
+    return {
+      x: wheelRadiusVh * Math.cos(triAngleRad),
+      y: 50 + wheelRadiusVh * Math.sin(triAngleRad),
+    };
+  }
 
-    // Spawn point: right edge of the selected triangle on the wheel
-    const baseSpawnX = wheelRadiusVh * Math.cos(triAngleRad);
-    const baseSpawnY = 50 + wheelRadiusVh * Math.sin(triAngleRad);
+  function spawnDeployment() {
+    // Count existing agents — cap at 14 (round-trip means more overlap)
+    if (agents.length >= 14) return;
+
+    // Pick a triangle to "activate" (source) — bias toward the visible right half
+    const visibleTriangles = [0, 1, 5]; // 0°, 60°, 300° — on the right side
+    const triIdx = visibleTriangles[Math.floor(Math.random() * visibleTriangles.length)];
+
+    // Flash this triangle (deploy pulse)
+    activeTriangle = triIdx;
+    setTimeout(() => { activeTriangle = -1; }, 700);
+
+    const spawn = triangleSpawnPoint(triIdx);
+
+    // Pick a DIFFERENT visible triangle as the return dock target (variety is good)
+    const returnCandidates = visibleTriangles.filter(t => t !== triIdx);
+    const returnTriIdx = returnCandidates[Math.floor(Math.random() * returnCandidates.length)];
+    const returnDock = triangleSpawnPoint(returnTriIdx);
 
     // Spawn 2-3 circles per deployment, slightly spread out
     const count = 2 + Math.floor(Math.random() * 2); // 2 or 3
@@ -80,13 +93,38 @@
       const spreadX = (Math.random() - 0.5) * 3; // ±1.5vw spread
       const spreadY = (Math.random() - 0.5) * 4; // ±2vh spread
 
-      const spawnX = baseSpawnX + spreadX;
-      const spawnY = baseSpawnY + spreadY;
+      const spawnX = spawn.x + spreadX;
+      const spawnY = spawn.y + spreadY;
 
-      // Travel angle: mostly rightward, slight random vertical variation
+      // Outbound travel angle: mostly rightward, slight random vertical variation
       const travelAngle = (Math.random() * 40 - 20) * (Math.PI / 180);
-      const duration = 8000 + Math.random() * 4000; // 8-12 seconds
+
+      // Peak travel distance (how far out before turning back)
+      const peakDistance = 55 + Math.random() * 40; // 55–95vw out
+      const peakDx = Math.cos(travelAngle) * peakDistance;
+      const peakDy = Math.sin(travelAngle) * peakDistance;
+
+      // Arc waypoint: offset perpendicular to the return path to create a curve.
+      // The midpoint of the arc swings "above" or "below" the straight return line.
+      // Perpendicular direction: rotate return vector 90° and scale.
+      const retVecX = returnDock.x - (spawnX + peakDx);
+      const retVecY = returnDock.y - (spawnY + peakDy);
+      const arcCurvature = (Math.random() > 0.5 ? 1 : -1) * (15 + Math.random() * 20);
+      // Perpendicular: (-retVecY, retVecX) normalised × curvature
+      const retLen = Math.sqrt(retVecX * retVecX + retVecY * retVecY) || 1;
+      const arcMidDx = peakDx + retVecX * 0.5 + (-retVecY / retLen) * arcCurvature;
+      const arcMidDy = peakDy + retVecY * 0.5 + (retVecX / retLen) * arcCurvature;
+
+      // Return destination relative to spawnX/spawnY
+      const finalDx = returnDock.x - spawnX + (Math.random() - 0.5) * 2;
+      const finalDy = returnDock.y - spawnY + (Math.random() - 0.5) * 2;
+
+      // Total round-trip duration: 14–18 seconds
+      const duration = 14000 + Math.random() * 4000;
       const size = 10 + Math.random() * 6; // 10-16px diameter
+
+      // Stagger each circle within a deployment by a small delay
+      const delay = i * (400 + Math.random() * 300);
 
       const id = ++agentId;
       agents = [...agents, {
@@ -94,23 +132,37 @@
         spawnX,
         spawnY,
         travelAngle,
+        peakDx,
+        peakDy,
+        arcMidDx,
+        arcMidDy,
+        finalDx,
+        finalDy,
         duration,
         size,
+        delay,
         born: Date.now(),
       }];
+
+      // Flash the return triangle when agent is about to dock (at ~90% of duration)
+      const dockFlashDelay = delay + duration * 0.88;
+      setTimeout(() => {
+        activeTriangle = returnTriIdx;
+        setTimeout(() => { activeTriangle = -1; }, 500);
+      }, dockFlashDelay);
 
       // Cleanup after animation completes
       setTimeout(() => {
         agents = agents.filter(a => a.id !== id);
-      }, duration + 200);
+      }, delay + duration + 200);
     }
   }
 
   onMount(() => {
     // Stagger first two deployment events
     setTimeout(() => spawnDeployment(), 1500);
-    setTimeout(() => spawnDeployment(), 4000);
-    launchInterval = setInterval(() => spawnDeployment(), 4000 + Math.random() * 2000);
+    setTimeout(() => spawnDeployment(), 4500);
+    launchInterval = setInterval(() => spawnDeployment(), 5000 + Math.random() * 2000);
   });
 
   onDestroy(() => {
@@ -118,16 +170,23 @@
   });
 
   function agentStyle(agent) {
-    const dx = Math.cos(agent.travelAngle) * 100; // vw travel distance
-    const dy = Math.sin(agent.travelAngle) * 100; // vh travel
+    // --dur and --dly are CSS custom properties so child elements (trails)
+    // can pick them up via var(--dur) / var(--dly) for their own animations.
     return `
       left: ${agent.spawnX}vw;
       top: ${agent.spawnY}vh;
       width: ${agent.size}px;
       height: ${agent.size}px;
-      --dx: ${dx}vw;
-      --dy: ${dy}vh;
+      --dx: ${agent.peakDx}vw;
+      --dy: ${agent.peakDy}vh;
+      --mdx: ${agent.arcMidDx}vw;
+      --mdy: ${agent.arcMidDy}vh;
+      --rx: ${agent.finalDx}vw;
+      --ry: ${agent.finalDy}vh;
+      --dur: ${agent.duration}ms;
+      --dly: ${agent.delay}ms;
       animation-duration: ${agent.duration}ms;
+      animation-delay: ${agent.delay}ms;
     `;
   }
 </script>
@@ -487,16 +546,62 @@
     z-index: 1;
     pointer-events: none;
     opacity: 0;
-    animation: agent-fly linear forwards;
+    /*
+      Round-trip animation:
+        0%   → spawn at triangle (opacity 0)
+        8%   → fade in, begin outbound leg
+        38%  → reach peak (farthest point from wheel)
+        55%  → arc midpoint (curved waypoint, perpendicular offset)
+        80%  → approaching return dock triangle
+        92%  → nearly docked, fading out
+        100% → docked at return triangle (opacity 0)
+
+      The multi-keyframe translate() path approximates a bezier curve:
+        outbound: straight(ish) rightward arc
+        return:   wide curved sweep back to a different triangle
+    */
+    animation: agent-fly ease-in-out both;
     transform-origin: center center;
   }
 
   @keyframes agent-fly {
-    0%   { opacity: 0;    transform: translate(0, 0); }
-    8%   { opacity: 0.18; }
-    70%  { opacity: 0.14; }
-    90%  { opacity: 0;    }
-    100% { opacity: 0;    transform: translate(var(--dx), var(--dy)); }
+    0%   {
+      opacity: 0;
+      transform: translate(0, 0);
+    }
+    8%   {
+      opacity: 0.18;
+      transform: translate(
+        calc(var(--dx) * 0.12),
+        calc(var(--dy) * 0.12)
+      );
+    }
+    38%  {
+      /* Peak — farthest point outward */
+      opacity: 0.16;
+      transform: translate(var(--dx), var(--dy));
+    }
+    55%  {
+      /* Arc midpoint — perpendicular curve waypoint for smooth return arc */
+      opacity: 0.13;
+      transform: translate(var(--mdx), var(--mdy));
+    }
+    80%  {
+      /* Approaching return dock */
+      opacity: 0.10;
+      transform: translate(
+        calc(var(--rx) * 0.85 + var(--mdx) * 0.15),
+        calc(var(--ry) * 0.85 + var(--mdy) * 0.15)
+      );
+    }
+    92%  {
+      opacity: 0.06;
+      transform: translate(var(--rx), var(--ry));
+    }
+    100% {
+      opacity: 0;
+      transform: translate(var(--rx), var(--ry));
+    }
   }
 
   .agent-svg {
@@ -508,16 +613,60 @@
     filter: drop-shadow(0 0 2px rgba(255,255,255,0.25));
   }
 
-  /* Motion trail lines — positioned to the left of the circle */
+  /*
+    Motion trail lines.
+    During the OUTBOUND leg (0%→38%), the circle moves rightward — trails extend leftward
+    (behind the circle in the direction of travel).
+    During the RETURN leg (55%→100%), the circle moves leftward — trails should extend
+    rightward. We achieve this by scaling the trail container to -1 on the X axis,
+    which mirrors the gradient so it fades in the correct direction, and repositioning
+    it to the right of the circle.
+
+    Layout:
+      .agent-trails is positioned relative to the agent-particle div.
+      Outbound: right: 100% of parent (trails to the left of the circle)
+      Return:   left:  100% of parent (trails to the right of the circle)
+    We animate via `left` switching (handled in keyframes via translate).
+  */
   .agent-trails {
     position: absolute;
     top: 50%;
+    /* Start on the LEFT side of the circle (outbound mode) */
     right: 100%;
+    left: auto;
     transform: translateY(-50%);
     display: flex;
     flex-direction: column;
     gap: 3px;
     padding-right: 4px;
+    animation: trail-flip ease-in-out both;
+    animation-duration: var(--dur, 16000ms);
+    animation-delay: var(--dly, 0ms);
+    transform-origin: right center;
+  }
+
+  @keyframes trail-flip {
+    /*
+      Strategy: position the trail div using translateX.
+      Outbound (0→35%): translateX(0) — stays on the LEFT (right:100% is the base position)
+      Transition (42→58%): shrink to near-zero so the flip is invisible, then jump
+      Return (65→100%): we can't easily switch from right:100% to left:100% in keyframes,
+        so instead we use a large negative translateX to jump the trails to the right of
+        the circle. The circle is ~16px wide. From right:100% position, moving by
+        calc(100% + 100% + 16px) would put us to the right side. We use a fixed offset
+        in vw since the parent is fixed-size. Since .agent-trails is ~22px wide and the
+        circle is 10-16px, we need roughly +200% of trail width + circle width to jump right.
+        We use scaleX(-1) to flip the gradient direction too.
+    */
+    0%   { transform: translateY(-50%) scaleX(1);    opacity: 1; }
+    35%  { transform: translateY(-50%) scaleX(1);    opacity: 1; }
+    44%  { transform: translateY(-50%) scaleX(0.05); opacity: 0.2; }
+    /* At 50%: jump to right side while invisible (scaleX near 0) */
+    50%  { transform: translateY(-50%) translateX(calc(200% + 24px)) scaleX(-0.05); opacity: 0.2; }
+    60%  { transform: translateY(-50%) translateX(calc(200% + 24px)) scaleX(-1);   opacity: 0.8; }
+    88%  { transform: translateY(-50%) translateX(calc(200% + 24px)) scaleX(-1);   opacity: 0.8; }
+    95%  { transform: translateY(-50%) translateX(calc(200% + 24px)) scaleX(-0.3); opacity: 0.2; }
+    100% { transform: translateY(-50%) translateX(calc(200% + 24px)) scaleX(0);    opacity: 0; }
   }
 
   .trail {
