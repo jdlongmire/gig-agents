@@ -33,58 +33,84 @@
   ];
 
   // ─── Agent Launch Animation ───────────────────────────────────────────────
+  // The wheel has 6 triangles (crews). Periodically one "activates" and deploys
+  // 2-3 agent circles (the hollow circles inside the logo triangles) rightward.
   // Wheel SVG coords: viewBox "0 0 800 800", center (400,400), radius ~320
   // The wheel is rendered at 150vh tall, positioned left:-75vh so center is at x=0
   // In viewport space, wheel center is at left edge. Right half visible.
-  // We spawn agents from the right edge of the wheel (approx viewport x=0 to 50vw range).
 
   let agents = [];
   let agentId = 0;
   let launchInterval;
-  let container;
+  // Index of the currently "active" (glowing) triangle on the wheel (0-5, or -1 for none)
+  let activeTriangle = -1;
 
-  function spawnAgent() {
-    if (agents.length >= 6) return;
+  // The 6 triangle positions on the wheel (angles in degrees, 0=right, CCW)
+  // We pick from the visible right half: triangles 0 (0°), 1 (60°), 5 (300°) are most visible
+  const triangleAngles = [0, 60, 120, 180, 240, 300];
 
-    // Wheel radius in viewport coords: wheel is 150vh tall so radius = 75vh
-    // Center is anchored at left:0, vcenter. Spawn from right side of wheel.
-    // Pick a random angle in [-70°, 70°] from rightward (0°)
-    const angle = (Math.random() * 140 - 70) * (Math.PI / 180); // radians
-    const wheelRadiusVh = 72; // slightly less than 75vh to stay on visible rim
+  function spawnDeployment() {
+    // Count existing agents — cap at 12 (up to 3 per event × 4 concurrent events)
+    if (agents.length >= 12) return;
 
-    // Position in vh/vw units: spawn from right edge of wheel
-    // x offset from left edge = wheelRadiusVh * cos(angle)
-    // y offset from vertical center = wheelRadiusVh * sin(angle)
-    const spawnX = wheelRadiusVh * Math.cos(angle); // vh units, but we'll use % of vh
-    const spawnY = 50 + wheelRadiusVh * Math.sin(angle) * (100 / 100); // vh from top
+    // Pick a triangle to "activate" — bias toward the visible right half
+    const visibleTriangles = [0, 1, 5]; // 0°, 60°, 300° — on the right side
+    const triIdx = visibleTriangles[Math.floor(Math.random() * visibleTriangles.length)];
+    const triAngleDeg = triangleAngles[triIdx];
 
-    // Travel angle: mostly rightward, slight random variation
-    const travelAngle = (Math.random() * 30 - 15) * (Math.PI / 180);
-    const duration = 8000 + Math.random() * 4000; // 8-12 seconds
-    const size = 28 + Math.random() * 16; // 28-44px
+    // Flash this triangle
+    activeTriangle = triIdx;
+    setTimeout(() => { activeTriangle = -1; }, 700);
 
-    const id = ++agentId;
-    agents = [...agents, {
-      id,
-      spawnX,    // vw from left
-      spawnY,    // vh from top
-      travelAngle,
-      duration,
-      size,
-      born: Date.now(),
-    }];
+    // Wheel radius in vh: wheel is 150vh so radius = 75vh, use 72vh to stay on visible rim
+    const wheelRadiusVh = 72;
+    const triAngleRad = triIdx === 0 ? 0
+      : triIdx === 1 ? -60 * (Math.PI / 180)
+      : triIdx === 5 ? 60 * (Math.PI / 180)
+      : triAngleDeg * (Math.PI / 180);
 
-    // Cleanup after animation completes
-    setTimeout(() => {
-      agents = agents.filter(a => a.id !== id);
-    }, duration + 200);
+    // Spawn point: right edge of the selected triangle on the wheel
+    const baseSpawnX = wheelRadiusVh * Math.cos(triAngleRad);
+    const baseSpawnY = 50 + wheelRadiusVh * Math.sin(triAngleRad);
+
+    // Spawn 2-3 circles per deployment, slightly spread out
+    const count = 2 + Math.floor(Math.random() * 2); // 2 or 3
+    for (let i = 0; i < count; i++) {
+      // Slight spread around spawn point so circles don't stack perfectly
+      const spreadX = (Math.random() - 0.5) * 3; // ±1.5vw spread
+      const spreadY = (Math.random() - 0.5) * 4; // ±2vh spread
+
+      const spawnX = baseSpawnX + spreadX;
+      const spawnY = baseSpawnY + spreadY;
+
+      // Travel angle: mostly rightward, slight random vertical variation
+      const travelAngle = (Math.random() * 40 - 20) * (Math.PI / 180);
+      const duration = 8000 + Math.random() * 4000; // 8-12 seconds
+      const size = 10 + Math.random() * 6; // 10-16px diameter
+
+      const id = ++agentId;
+      agents = [...agents, {
+        id,
+        spawnX,
+        spawnY,
+        travelAngle,
+        duration,
+        size,
+        born: Date.now(),
+      }];
+
+      // Cleanup after animation completes
+      setTimeout(() => {
+        agents = agents.filter(a => a.id !== id);
+      }, duration + 200);
+    }
   }
 
   onMount(() => {
-    // Stagger first few agents
-    setTimeout(() => spawnAgent(), 1000);
-    setTimeout(() => spawnAgent(), 3500);
-    launchInterval = setInterval(() => spawnAgent(), 4000 + Math.random() * 2000);
+    // Stagger first two deployment events
+    setTimeout(() => spawnDeployment(), 1500);
+    setTimeout(() => spawnDeployment(), 4000);
+    launchInterval = setInterval(() => spawnDeployment(), 4000 + Math.random() * 2000);
   });
 
   onDestroy(() => {
@@ -150,30 +176,8 @@
           (rotated so apex points away from center)
         -->
 
-        <!-- ── Triangle 0: right (0°) ── -->
-        <g transform="rotate(0)">
-          <!-- Connector lines to neighbors (0° → 300° and 0° → 60°) -->
-          <!-- Line to right-base of prior triangle (300°) and left-base of next (60°) -->
-          <!-- These are drawn as ring connections between adjacent triangles -->
-          <!-- Position center of this triangle at radius 300 -->
-          <g transform="translate(300, 0) rotate(90)">
-            <!-- Triangle outline (apex points outward = up in local coords after rotate) -->
-            <polygon
-              points="0,-90 78,45 -78,45"
-              fill="none"
-              stroke="white"
-              stroke-width="1.5"
-              stroke-linejoin="round"
-            />
-            <!-- Inner circles (3 circles at the 3 vertices, inset) -->
-            <circle cx="0" cy="-60" r="7" fill="none" stroke="white" stroke-width="1.2"/>
-            <circle cx="52" cy="30" r="7" fill="none" stroke="white" stroke-width="1.2"/>
-            <circle cx="-52" cy="30" r="7" fill="none" stroke="white" stroke-width="1.2"/>
-          </g>
-        </g>
-
-        <!-- ── Triangle 1: upper-right (60°) ── -->
-        <g transform="rotate(-60)">
+        <!-- ── Triangle 0: right (0°) — index 0 ── -->
+        <g transform="rotate(0)" class={activeTriangle === 0 ? 'tri-active' : ''}>
           <g transform="translate(300, 0) rotate(90)">
             <polygon
               points="0,-90 78,45 -78,45"
@@ -188,8 +192,8 @@
           </g>
         </g>
 
-        <!-- ── Triangle 2: upper-left (120°) ── -->
-        <g transform="rotate(-120)">
+        <!-- ── Triangle 1: upper-right (60°) — index 1 ── -->
+        <g transform="rotate(-60)" class={activeTriangle === 1 ? 'tri-active' : ''}>
           <g transform="translate(300, 0) rotate(90)">
             <polygon
               points="0,-90 78,45 -78,45"
@@ -204,8 +208,8 @@
           </g>
         </g>
 
-        <!-- ── Triangle 3: left (180°) ── -->
-        <g transform="rotate(-180)">
+        <!-- ── Triangle 2: upper-left (120°) — index 2 ── -->
+        <g transform="rotate(-120)" class={activeTriangle === 2 ? 'tri-active' : ''}>
           <g transform="translate(300, 0) rotate(90)">
             <polygon
               points="0,-90 78,45 -78,45"
@@ -220,8 +224,8 @@
           </g>
         </g>
 
-        <!-- ── Triangle 4: lower-left (240°) ── -->
-        <g transform="rotate(-240)">
+        <!-- ── Triangle 3: left (180°) — index 3 ── -->
+        <g transform="rotate(-180)" class={activeTriangle === 3 ? 'tri-active' : ''}>
           <g transform="translate(300, 0) rotate(90)">
             <polygon
               points="0,-90 78,45 -78,45"
@@ -236,8 +240,24 @@
           </g>
         </g>
 
-        <!-- ── Triangle 5: lower-right (300°) ── -->
-        <g transform="rotate(-300)">
+        <!-- ── Triangle 4: lower-left (240°) — index 4 ── -->
+        <g transform="rotate(-240)" class={activeTriangle === 4 ? 'tri-active' : ''}>
+          <g transform="translate(300, 0) rotate(90)">
+            <polygon
+              points="0,-90 78,45 -78,45"
+              fill="none"
+              stroke="white"
+              stroke-width="1.5"
+              stroke-linejoin="round"
+            />
+            <circle cx="0" cy="-60" r="7" fill="none" stroke="white" stroke-width="1.2"/>
+            <circle cx="52" cy="30" r="7" fill="none" stroke="white" stroke-width="1.2"/>
+            <circle cx="-52" cy="30" r="7" fill="none" stroke="white" stroke-width="1.2"/>
+          </g>
+        </g>
+
+        <!-- ── Triangle 5: lower-right (300°) — index 5 ── -->
+        <g transform="rotate(-300)" class={activeTriangle === 5 ? 'tri-active' : ''}>
           <g transform="translate(300, 0) rotate(90)">
             <polygon
               points="0,-90 78,45 -78,45"
@@ -311,37 +331,33 @@
     </svg>
   </div><!-- end .wheel-layer -->
 
-  <!-- ─── Agent Particles ────────────────────────────────────────────────── -->
+  <!-- ─── Agent Particles (hollow circles = deployed agents/tasks) ─────── -->
   {#each agents as agent (agent.id)}
     <div
       class="agent-particle"
       style={agentStyle(agent)}
       aria-hidden="true"
     >
-      <!-- Motion trail lines (behind the triangle) -->
+      <!-- Motion trail lines (behind the circle, to its left) -->
       <div class="agent-trails">
         <div class="trail trail-1"></div>
         <div class="trail trail-2"></div>
         <div class="trail trail-3"></div>
       </div>
-      <!-- Agent triangle SVG -->
+      <!-- Agent circle: hollow white outline matching logo's inner circles -->
       <svg
         class="agent-svg"
-        viewBox="0 0 60 60"
+        viewBox="0 0 1 1"
         xmlns="http://www.w3.org/2000/svg"
         width="100%"
         height="100%"
       >
-        <polygon
-          points="30,4 56,52 4,52"
+        <circle
+          cx="0.5" cy="0.5" r="0.42"
           fill="none"
           stroke="white"
-          stroke-width="2"
-          stroke-linejoin="round"
+          stroke-width="0.1"
         />
-        <circle cx="30" cy="14" r="4" fill="none" stroke="white" stroke-width="1.5"/>
-        <circle cx="44" cy="42" r="4" fill="none" stroke="white" stroke-width="1.5"/>
-        <circle cx="16" cy="42" r="4" fill="none" stroke="white" stroke-width="1.5"/>
       </svg>
     </div>
   {/each}
@@ -457,23 +473,30 @@
     to   { transform: rotate(-360deg); }
   }
 
-  /* ─── Agent Particles ───────────────────────────────────────────────── */
+  /* ─── Triangle activation glow (brief pulse when a crew deploys) ────── */
+  /* filter: brightness() works on SVG <g> elements in modern browsers.    */
+  /* Boosts the triangle to appear bright against the faded wheel.         */
+  .wheel-svg .tri-active {
+    filter: brightness(8) drop-shadow(0 0 6px white);
+    transition: filter 0.1s ease;
+  }
+
+  /* ─── Agent Particles (hollow circles) ──────────────────────────────── */
   .agent-particle {
     position: fixed;
     z-index: 1;
     pointer-events: none;
-    /* Default opacity — tweaked per particle via animation */
     opacity: 0;
     animation: agent-fly linear forwards;
     transform-origin: center center;
   }
 
   @keyframes agent-fly {
-    0%   { opacity: 0;    transform: translate(0, 0) rotate(0deg); }
-    8%   { opacity: 0.14; }
-    70%  { opacity: 0.12; }
+    0%   { opacity: 0;    transform: translate(0, 0); }
+    8%   { opacity: 0.18; }
+    70%  { opacity: 0.14; }
     90%  { opacity: 0;    }
-    100% { opacity: 0;    transform: translate(var(--dx), var(--dy)) rotate(12deg); }
+    100% { opacity: 0;    transform: translate(var(--dx), var(--dy)); }
   }
 
   .agent-svg {
@@ -482,10 +505,10 @@
     left: 0;
     width: 100%;
     height: 100%;
-    filter: drop-shadow(0 0 3px rgba(255,255,255,0.3));
+    filter: drop-shadow(0 0 2px rgba(255,255,255,0.25));
   }
 
-  /* Motion trail lines — positioned to the left of the triangle */
+  /* Motion trail lines — positioned to the left of the circle */
   .agent-trails {
     position: absolute;
     top: 50%;
@@ -493,18 +516,18 @@
     transform: translateY(-50%);
     display: flex;
     flex-direction: column;
-    gap: 4px;
-    padding-right: 6px;
+    gap: 3px;
+    padding-right: 4px;
   }
 
   .trail {
     height: 1px;
-    background: linear-gradient(to left, rgba(255,255,255,0.3), transparent);
+    background: linear-gradient(to left, rgba(255,255,255,0.25), transparent);
     border-radius: 1px;
   }
-  .trail-1 { width: 28px; margin-left: 0; }
-  .trail-2 { width: 20px; margin-left: 4px; opacity: 0.7; }
-  .trail-3 { width: 13px; margin-left: 8px; opacity: 0.45; }
+  .trail-1 { width: 22px; margin-left: 0; }
+  .trail-2 { width: 15px; margin-left: 3px; opacity: 0.65; }
+  .trail-3 { width: 9px;  margin-left: 6px; opacity: 0.4; }
 
   /* ─── Content Layer ─────────────────────────────────────────────────── */
   .content-layer {
