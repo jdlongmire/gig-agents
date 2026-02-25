@@ -32,3 +32,10 @@ __pycache__/
 # Test
 coverage.out
 *.test
+
+# CrewPort specific
+*.db
+*.db-shm
+*.db-wal
+web/node_modules/
+web/.svelte-kit/
