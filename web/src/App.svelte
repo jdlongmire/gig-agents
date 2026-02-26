@@ -113,7 +113,7 @@
     align-items: center;
     justify-content: center;
     gap: 32px;
-    background: var(--ctp-crust);
+    background: var(--bg-primary);
   }
 
   .boot-logo {
@@ -127,8 +127,8 @@
   .boot-spinner {
     width: 24px;
     height: 24px;
-    border: 2px solid var(--ctp-surface1);
-    border-top-color: var(--ctp-blue);
+    border: 2px solid var(--border-color);
+    border-top-color: var(--text-primary);
     border-radius: 50%;
     animation: spin 0.8s linear infinite;
   }

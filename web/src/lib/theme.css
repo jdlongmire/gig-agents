@@ -1,48 +1,64 @@
-/* Catppuccin Mocha — CrewPort Theme */
+/* CrewPort Theme — Monochrome */
+
+/* ── Dark theme (default) ─────────────────────────────────── */
+
+:root,
+[data-theme="dark"] {
+  --bg-primary:   #0a0a0a;
+  --bg-secondary: #0f0f0f;
+  --bg-tertiary:  #1a1a1a;
+
+  --text-primary:   #ffffff;
+  --text-secondary: #aaaaaa;
+  --text-tertiary:  #666666;
+
+  --border-color:  rgba(255, 255, 255, 0.07);
+  --border-subtle: rgba(255, 255, 255, 0.04);
+
+  --accent-primary: #ffffff;
+  --accent-hover:   rgba(255, 255, 255, 0.7);
+
+  --shadow:    0 2px 8px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.7);
+}
+
+/* ── Light theme ──────────────────────────────────────────── */
+
+[data-theme="light"] {
+  --bg-primary:   #fafafa;
+  --bg-secondary: #f0f0f0;
+  --bg-tertiary:  #e5e5e5;
+
+  --text-primary:   #0a0a0a;
+  --text-secondary: #555555;
+  --text-tertiary:  #999999;
+
+  --border-color:  rgba(0, 0, 0, 0.08);
+  --border-subtle: rgba(0, 0, 0, 0.04);
+
+  --accent-primary: #0a0a0a;
+  --accent-hover:   rgba(0, 0, 0, 0.7);
+
+  --shadow:    0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* ── Component tokens (theme-independent) ─────────────────── */
 
 :root {
-  /* Base palette */
-  --ctp-base:    #1e1e2e;
-  --ctp-mantle:  #181825;
-  --ctp-crust:   #11111b;
-
-  /* Surface */
-  --ctp-surface0: #313244;
-  --ctp-surface1: #45475a;
-  --ctp-surface2: #585b70;
-
-  /* Text */
-  --ctp-text:     #cdd6f4;
-  --ctp-subtext1: #bac2de;
-  --ctp-subtext0: #a6adc8;
-
-  /* Accent colors */
-  --ctp-blue:   #89b4fa;
-  --ctp-green:  #a6e3a1;
-  --ctp-red:    #f38ba8;
-  --ctp-yellow: #f9e2af;
-  --ctp-mauve:  #cba6f7;
-  --ctp-teal:   #94e2d5;
-
-  /* Component tokens */
-  --border-color: var(--ctp-surface0);
   --border: 1px solid var(--border-color);
-  --shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.4);
   --radius: 6px;
   --radius-sm: 4px;
   --transition: 150ms ease;
 
-  /* Layout */
   --sidebar-width: 240px;
   --header-height: 56px;
 
-  /* Typography */
   --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', ui-monospace, monospace;
 }
 
-/* ── Reset & Base ────────────────────────────────────────── */
+/* ── Reset & Base ─────────────────────────────────────────── */
 
 *, *::before, *::after {
   box-sizing: border-box;
@@ -50,15 +66,21 @@
   padding: 0;
 }
 
-html, body {
+html {
+  height: 100%;
+}
+
+body {
   height: 100%;
   font-family: var(--font-sans);
   font-size: 14px;
   line-height: 1.5;
-  color: var(--ctp-text);
-  background: var(--ctp-base);
+  color: var(--text-primary);
+  background: var(--bg-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Smooth theme transitions */
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 #app {
@@ -66,13 +88,13 @@ html, body {
 }
 
 a {
-  color: var(--ctp-blue);
+  color: var(--text-primary);
   text-decoration: none;
   transition: opacity var(--transition);
 }
 
 a:hover {
-  opacity: 0.85;
+  opacity: 0.7;
 }
 
 button {
@@ -86,8 +108,8 @@ button {
 input, textarea, select {
   font-family: var(--font-sans);
   font-size: 14px;
-  color: var(--ctp-text);
-  background: var(--ctp-surface0);
+  color: var(--text-primary);
+  background: var(--bg-tertiary);
   border: var(--border);
   border-radius: var(--radius-sm);
   padding: 8px 12px;
@@ -96,13 +118,13 @@ input, textarea, select {
 }
 
 input:focus, textarea:focus, select:focus {
-  border-color: var(--ctp-blue);
+  border-color: var(--accent-primary);
 }
 
-/* ── Utility classes ─────────────────────────────────────── */
+/* ── Utility classes ──────────────────────────────────────── */
 
 .text-muted {
-  color: var(--ctp-subtext0);
+  color: var(--text-tertiary);
 }
 
 .text-sm {
@@ -121,16 +143,11 @@ input:focus, textarea:focus, select:focus {
   font-weight: 600;
   letter-spacing: 0.03em;
   text-transform: uppercase;
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
 }
 
-.badge-blue   { background: rgba(137,180,250,0.15); color: var(--ctp-blue); }
-.badge-green  { background: rgba(166,227,161,0.15); color: var(--ctp-green); }
-.badge-red    { background: rgba(243,139,168,0.15); color: var(--ctp-red); }
-.badge-yellow { background: rgba(249,226,175,0.15); color: var(--ctp-yellow); }
-.badge-mauve  { background: rgba(203,166,247,0.15); color: var(--ctp-mauve); }
-.badge-teal   { background: rgba(148,226,213,0.15); color: var(--ctp-teal); }
-
-/* ── Scrollbar ───────────────────────────────────────────── */
+/* ── Scrollbar ────────────────────────────────────────────── */
 
 ::-webkit-scrollbar {
   width: 6px;
@@ -138,14 +155,14 @@ input:focus, textarea:focus, select:focus {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--ctp-mantle);
+  background: var(--bg-secondary);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--ctp-surface1);
+  background: var(--bg-tertiary);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--ctp-surface2);
+  background: var(--text-tertiary);
 }

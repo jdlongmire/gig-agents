@@ -65,14 +65,14 @@
   .page-title {
     font-size: 22px;
     font-weight: 600;
-    color: var(--ctp-text);
+    color: var(--text-primary);
     letter-spacing: 0.02em;
     margin-bottom: 4px;
   }
 
   .page-subtitle {
     font-size: 13px;
-    color: var(--ctp-subtext0);
+    color: var(--text-tertiary);
   }
 
   .stats-grid {
@@ -83,7 +83,7 @@
   }
 
   .stat-card {
-    background: var(--ctp-mantle);
+    background: var(--bg-secondary);
     border: var(--border);
     border-radius: var(--radius);
     padding: 20px;
@@ -92,7 +92,7 @@
 
   .stat-label {
     font-size: 12px;
-    color: var(--ctp-subtext0);
+    color: var(--text-tertiary);
     text-transform: uppercase;
     letter-spacing: 0.06em;
     margin-bottom: 8px;
@@ -101,7 +101,7 @@
   .stat-value {
     font-size: 28px;
     font-weight: 700;
-    color: var(--ctp-text);
+    color: var(--text-primary);
     font-family: var(--font-mono);
   }
 
@@ -112,7 +112,7 @@
   }
 
   .panel {
-    background: var(--ctp-mantle);
+    background: var(--bg-secondary);
     border: var(--border);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
@@ -130,14 +130,14 @@
   .panel-title {
     font-size: 13px;
     font-weight: 600;
-    color: var(--ctp-subtext1);
+    color: var(--text-secondary);
     text-transform: uppercase;
     letter-spacing: 0.06em;
   }
 
   .panel-link {
     font-size: 12px;
-    color: var(--ctp-blue);
+    color: var(--text-primary);
   }
 
   .panel-empty {
@@ -146,7 +146,7 @@
     align-items: center;
     justify-content: center;
     padding: 48px 24px;
-    color: var(--ctp-subtext0);
+    color: var(--text-tertiary);
     gap: 12px;
   }
 

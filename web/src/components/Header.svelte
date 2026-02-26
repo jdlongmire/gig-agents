@@ -34,7 +34,7 @@
       <div class="user-info">
         <span class="username">@{user.github_username}</span>
         {#if user.role}
-          <span class="badge {user.role === 'operator' ? 'badge-blue' : 'badge-teal'}">{user.role}</span>
+          <span class="badge">{user.role}</span>
         {/if}
         {#if user.avatar_url}
           <img src={user.avatar_url} alt={user.display_name || user.github_username} class="avatar" />
@@ -57,7 +57,7 @@
 <style>
   .header {
     height: var(--header-height);
-    background: var(--ctp-mantle);
+    background: var(--bg-secondary);
     border-bottom: var(--border);
     display: flex;
     align-items: center;
@@ -81,15 +81,15 @@
     align-items: center;
     justify-content: center;
     background: transparent;
-    color: var(--ctp-subtext0);
+    color: var(--text-tertiary);
     border-radius: var(--radius-sm);
     flex-shrink: 0;
     transition: all var(--transition);
   }
 
   .toggle-btn:hover {
-    background: var(--ctp-surface0);
-    color: var(--ctp-text);
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
   }
 
   .menu-icon {
@@ -100,7 +100,7 @@
   .page-title {
     font-size: 15px;
     font-weight: 600;
-    color: var(--ctp-text);
+    color: var(--text-primary);
     letter-spacing: 0.02em;
     white-space: nowrap;
     overflow: hidden;
@@ -122,15 +122,27 @@
 
   .username {
     font-size: 13px;
-    color: var(--ctp-subtext1);
+    color: var(--text-secondary);
     font-family: var(--font-mono);
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
   }
 
   .avatar {
     width: 28px;
     height: 28px;
     border-radius: 50%;
-    border: 1px solid var(--ctp-surface1);
+    border: 1px solid var(--border-color);
     object-fit: cover;
   }
 
@@ -138,14 +150,14 @@
     width: 28px;
     height: 28px;
     border-radius: 50%;
-    background: var(--ctp-surface0);
-    border: 1px solid var(--ctp-surface1);
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 12px;
     font-weight: 700;
-    color: var(--ctp-blue);
+    color: var(--text-primary);
   }
 
   .logout-btn {
@@ -155,14 +167,14 @@
     align-items: center;
     justify-content: center;
     background: transparent;
-    color: var(--ctp-subtext0);
+    color: var(--text-tertiary);
     border-radius: var(--radius-sm);
     transition: all var(--transition);
   }
 
   .logout-btn:hover {
-    background: rgba(243, 139, 168, 0.1);
-    color: var(--ctp-red);
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
   }
 
   .logout-icon {

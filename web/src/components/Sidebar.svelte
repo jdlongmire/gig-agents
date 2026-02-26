@@ -55,7 +55,7 @@
     width: var(--sidebar-width);
     min-width: var(--sidebar-width);
     height: 100%;
-    background: var(--ctp-mantle);
+    background: var(--bg-secondary);
     border-right: var(--border);
     display: flex;
     flex-direction: column;
@@ -95,7 +95,7 @@
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--ctp-text);
+    color: var(--text-primary);
     white-space: nowrap;
   }
 
@@ -115,7 +115,7 @@
     gap: 10px;
     padding: 9px 10px;
     border-radius: var(--radius-sm);
-    color: var(--ctp-subtext0);
+    color: var(--text-tertiary);
     text-decoration: none;
     font-size: 13px;
     font-weight: 500;
@@ -126,15 +126,15 @@
   }
 
   .nav-item:hover {
-    color: var(--ctp-text);
-    background: var(--ctp-surface0);
+    color: var(--text-primary);
+    background: var(--bg-tertiary);
     opacity: 1;
   }
 
   .nav-item.active {
-    color: var(--ctp-blue);
-    background: rgba(137, 180, 250, 0.08);
-    border-left-color: var(--ctp-blue);
+    color: var(--text-primary);
+    background: var(--bg-tertiary);
+    border-left-color: var(--text-primary);
   }
 
   .nav-icon {
@@ -162,14 +162,14 @@
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    background: var(--ctp-green);
-    box-shadow: 0 0 6px rgba(166, 227, 161, 0.5);
+    background: var(--text-secondary);
+    box-shadow: 0 0 6px var(--border-color);
     flex-shrink: 0;
   }
 
   .status-label {
     font-size: 11px;
-    color: var(--ctp-subtext0);
+    color: var(--text-tertiary);
     text-transform: uppercase;
     letter-spacing: 0.06em;
   }

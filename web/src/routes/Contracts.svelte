@@ -55,20 +55,20 @@
   .page-title {
     font-size: 22px;
     font-weight: 600;
-    color: var(--ctp-text);
+    color: var(--text-primary);
     letter-spacing: 0.02em;
     margin-bottom: 4px;
   }
 
   .page-subtitle {
     font-size: 13px;
-    color: var(--ctp-subtext0);
+    color: var(--text-tertiary);
   }
 
   .btn-primary {
     padding: 8px 16px;
-    background: var(--ctp-blue);
-    color: var(--ctp-crust);
+    background: var(--text-primary);
+    color: var(--bg-primary);
     border-radius: var(--radius-sm);
     font-size: 13px;
     font-weight: 600;
@@ -86,7 +86,7 @@
     gap: 4px;
     margin-bottom: 24px;
     padding: 4px;
-    background: var(--ctp-mantle);
+    background: var(--bg-secondary);
     border: var(--border);
     border-radius: var(--radius);
     width: fit-content;
@@ -96,19 +96,19 @@
     padding: 6px 14px;
     border-radius: var(--radius-sm);
     font-size: 13px;
-    color: var(--ctp-subtext0);
+    color: var(--text-tertiary);
     background: transparent;
     transition: all var(--transition);
   }
 
   .filter-btn:hover {
-    color: var(--ctp-text);
-    background: var(--ctp-surface0);
+    color: var(--text-primary);
+    background: var(--bg-tertiary);
   }
 
   .filter-btn.active {
-    color: var(--ctp-text);
-    background: var(--ctp-surface0);
+    color: var(--text-primary);
+    background: var(--bg-tertiary);
     box-shadow: var(--shadow);
   }
 
@@ -119,7 +119,7 @@
     justify-content: center;
     padding: 80px 24px;
     text-align: center;
-    color: var(--ctp-subtext0);
+    color: var(--text-tertiary);
     gap: 12px;
   }
 
@@ -132,7 +132,7 @@
   .empty-state h3 {
     font-size: 16px;
     font-weight: 600;
-    color: var(--ctp-subtext1);
+    color: var(--text-secondary);
   }
 
   .empty-state p {

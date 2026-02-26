@@ -63,20 +63,20 @@
   .page-title {
     font-size: 22px;
     font-weight: 600;
-    color: var(--ctp-text);
+    color: var(--text-primary);
     letter-spacing: 0.02em;
     margin-bottom: 4px;
   }
 
   .page-subtitle {
     font-size: 13px;
-    color: var(--ctp-subtext0);
+    color: var(--text-tertiary);
   }
 
   .btn-primary {
     padding: 8px 16px;
-    background: var(--ctp-blue);
-    color: var(--ctp-crust);
+    background: var(--text-primary);
+    color: var(--bg-primary);
     border-radius: var(--radius-sm);
     font-size: 13px;
     font-weight: 600;
@@ -97,7 +97,7 @@
   }
 
   .section-card {
-    background: var(--ctp-mantle);
+    background: var(--bg-secondary);
     border: var(--border);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
@@ -115,7 +115,7 @@
   .section-title {
     font-size: 13px;
     font-weight: 600;
-    color: var(--ctp-subtext1);
+    color: var(--text-secondary);
     text-transform: uppercase;
     letter-spacing: 0.06em;
   }
@@ -127,7 +127,7 @@
     justify-content: center;
     padding: 48px 24px;
     text-align: center;
-    color: var(--ctp-subtext0);
+    color: var(--text-tertiary);
     gap: 6px;
   }
 
@@ -143,7 +143,7 @@
 
   .hint {
     font-size: 12px !important;
-    color: var(--ctp-surface2);
+    color: var(--text-tertiary);
   }
 
   .info-banner {
@@ -151,14 +151,14 @@
     align-items: flex-start;
     gap: 12px;
     padding: 16px 20px;
-    background: rgba(137, 180, 250, 0.08);
-    border: 1px solid rgba(137, 180, 250, 0.2);
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
     border-radius: var(--radius);
   }
 
   .banner-icon {
     font-size: 16px;
-    color: var(--ctp-blue);
+    color: var(--text-primary);
     flex-shrink: 0;
     margin-top: 1px;
     font-style: normal;
@@ -167,12 +167,12 @@
 
   .banner-text {
     font-size: 13px;
-    color: var(--ctp-subtext1);
+    color: var(--text-secondary);
     line-height: 1.5;
   }
 
   .banner-text strong {
-    color: var(--ctp-blue);
+    color: var(--text-primary);
     font-weight: 600;
   }
 

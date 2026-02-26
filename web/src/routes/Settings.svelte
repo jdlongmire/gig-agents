@@ -84,14 +84,14 @@
   .page-title {
     font-size: 22px;
     font-weight: 600;
-    color: var(--ctp-text);
+    color: var(--text-primary);
     letter-spacing: 0.02em;
     margin-bottom: 4px;
   }
 
   .page-subtitle {
     font-size: 13px;
-    color: var(--ctp-subtext0);
+    color: var(--text-tertiary);
   }
 
   .settings-sections {
@@ -105,16 +105,16 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: var(--ctp-subtext0);
+    color: var(--text-tertiary);
     margin-bottom: 10px;
   }
 
   .section-title.danger {
-    color: var(--ctp-red);
+    color: var(--text-tertiary);
   }
 
   .settings-card {
-    background: var(--ctp-mantle);
+    background: var(--bg-secondary);
     border: var(--border);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
@@ -131,7 +131,7 @@
     width: 48px;
     height: 48px;
     border-radius: 50%;
-    border: 2px solid var(--ctp-surface1);
+    border: 2px solid var(--border-color);
     object-fit: cover;
     flex-shrink: 0;
   }
@@ -140,21 +140,21 @@
     width: 48px;
     height: 48px;
     border-radius: 50%;
-    background: var(--ctp-surface0);
-    border: 2px solid var(--ctp-surface1);
+    background: var(--bg-tertiary);
+    border: 2px solid var(--border-color);
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 700;
     font-size: 18px;
-    color: var(--ctp-blue);
+    color: var(--text-primary);
     flex-shrink: 0;
   }
 
   .profile-name {
     font-size: 15px;
     font-weight: 600;
-    color: var(--ctp-text);
+    color: var(--text-primary);
     margin-bottom: 4px;
   }
 
@@ -175,21 +175,21 @@
   .danger-label {
     font-size: 14px;
     font-weight: 600;
-    color: var(--ctp-text);
+    color: var(--text-primary);
     margin-bottom: 4px;
   }
 
   .danger-desc {
     font-size: 12px;
-    color: var(--ctp-subtext0);
+    color: var(--text-tertiary);
     line-height: 1.4;
   }
 
   .btn-danger {
     padding: 8px 16px;
-    background: rgba(243, 139, 168, 0.1);
-    color: var(--ctp-red);
-    border: 1px solid rgba(243, 139, 168, 0.3);
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
     border-radius: var(--radius-sm);
     font-size: 13px;
     font-weight: 600;
@@ -198,8 +198,8 @@
   }
 
   .btn-danger:hover {
-    background: rgba(243, 139, 168, 0.2);
-    border-color: rgba(243, 139, 168, 0.5);
+    background: var(--bg-secondary);
+    border-color: var(--text-tertiary);
   }
 
   .info-grid {
@@ -216,12 +216,12 @@
 
   .info-label {
     font-size: 13px;
-    color: var(--ctp-subtext0);
+    color: var(--text-tertiary);
   }
 
   .info-value {
     font-size: 13px;
-    color: var(--ctp-text);
+    color: var(--text-primary);
   }
 
   @media (max-width: 600px) {

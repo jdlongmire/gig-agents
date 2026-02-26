@@ -31,7 +31,7 @@
     font-size: 80px;
     font-weight: 800;
     font-family: var(--font-mono);
-    color: var(--ctp-surface1);
+    color: var(--bg-tertiary);
     line-height: 1;
     margin-bottom: 16px;
     letter-spacing: -0.04em;
@@ -40,21 +40,21 @@
   .title {
     font-size: 22px;
     font-weight: 600;
-    color: var(--ctp-text);
+    color: var(--text-primary);
     margin-bottom: 12px;
   }
 
   .desc {
     font-size: 14px;
-    color: var(--ctp-subtext0);
+    color: var(--text-tertiary);
     line-height: 1.5;
     margin-bottom: 32px;
   }
 
   .btn-home {
     padding: 10px 20px;
-    background: var(--ctp-surface0);
-    color: var(--ctp-text);
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
     border: var(--border);
     border-radius: var(--radius-sm);
     font-size: 13px;
@@ -63,7 +63,7 @@
   }
 
   .btn-home:hover {
-    background: var(--ctp-surface1);
-    border-color: var(--ctp-surface2);
+    background: var(--bg-secondary);
+    border-color: var(--border-color);
   }
 </style>

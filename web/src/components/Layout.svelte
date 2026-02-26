@@ -59,7 +59,7 @@
     display: flex;
     height: 100vh;
     overflow: hidden;
-    background: var(--ctp-base);
+    background: var(--bg-primary);
   }
 
   .sidebar-wrap {
@@ -81,7 +81,7 @@
   .content {
     flex: 1;
     overflow-y: auto;
-    background: var(--ctp-base);
+    background: var(--bg-primary);
   }
 
   .overlay {
