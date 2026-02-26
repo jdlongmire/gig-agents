@@ -2,6 +2,7 @@
   import { onMount, onDestroy } from 'svelte';
   import { push } from 'svelte-spa-router';
   import { auth } from '../lib/auth.js';
+  import ThemeToggle from '../components/ThemeToggle.svelte';
 
   // Redirect if already authenticated
   onMount(() => {
@@ -445,8 +446,9 @@ Acceptance Criteria:
         <button class="nav-link" on:click={() => scrollTo('faq')}>FAQ</button>
       </div>
 
-      <!-- Right: Sign In + Hamburger -->
+      <!-- Right: Theme Toggle + Sign In + Hamburger -->
       <div class="nav-actions">
+        <ThemeToggle />
         <a href="/auth/github" class="nav-signin">Sign In</a>
         <button
           class="hamburger"
@@ -476,6 +478,10 @@ Acceptance Criteria:
         <button class="mobile-link" on:click={() => scrollTo('use-cases')}>Use Cases</button>
         <button class="mobile-link" on:click={() => scrollTo('pricing')}>Pricing</button>
         <button class="mobile-link" on:click={() => scrollTo('faq')}>FAQ</button>
+        <div class="mobile-theme-row">
+          <ThemeToggle />
+          <span class="mobile-theme-label">Toggle theme</span>
+        </div>
         <a href="/auth/github" class="mobile-signin">Sign In with GitHub</a>
       </div>
     </div>
@@ -1113,6 +1119,21 @@ Acceptance Criteria:
   }
 
   .mobile-signin:hover { background: rgba(255,255,255,0.05); }
+
+  .mobile-theme-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+    margin-top: 12px;
+    border-top: 1px solid var(--border-color);
+  }
+
+  .mobile-theme-label {
+    font-size: 13px;
+    color: var(--text-secondary);
+    letter-spacing: 0.04em;
+  }
 
   /* ─── Wheel Layer ───────────────────────────────────────────────────────── */
   .wheel-layer {
