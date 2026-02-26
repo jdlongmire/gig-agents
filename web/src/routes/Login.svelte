@@ -500,74 +500,74 @@ Acceptance Criteria:
         <!-- Triangle 0: right (0 deg) -->
         <g transform="rotate(0)" class={activeTriangle === 0 ? 'tri-active' : ''}>
           <g transform="translate(300, 0) rotate(90)">
-            <polygon points="0,-90 78,45 -78,45" fill="none" stroke="white" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
-            <circle cx="0" cy="-38" r="16" fill="none" stroke="white" stroke-width="2.5"/>
-            <circle cx="33" cy="19" r="16" fill="none" stroke="white" stroke-width="2.5"/>
-            <circle cx="-33" cy="19" r="16" fill="none" stroke="white" stroke-width="2.5"/>
+            <polygon points="0,-90 78,45 -78,45" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+            <circle cx="0" cy="-38" r="16" fill="none" stroke="currentColor" stroke-width="2.5"/>
+            <circle cx="33" cy="19" r="16" fill="none" stroke="currentColor" stroke-width="2.5"/>
+            <circle cx="-33" cy="19" r="16" fill="none" stroke="currentColor" stroke-width="2.5"/>
           </g>
         </g>
 
         <!-- Triangle 1: upper-right (60 deg) -->
         <g transform="rotate(-60)" class={activeTriangle === 1 ? 'tri-active' : ''}>
           <g transform="translate(300, 0) rotate(90)">
-            <polygon points="0,-90 78,45 -78,45" fill="none" stroke="white" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
-            <circle cx="0" cy="-38" r="16" fill="none" stroke="white" stroke-width="2.5"/>
-            <circle cx="33" cy="19" r="16" fill="none" stroke="white" stroke-width="2.5"/>
-            <circle cx="-33" cy="19" r="16" fill="none" stroke="white" stroke-width="2.5"/>
+            <polygon points="0,-90 78,45 -78,45" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+            <circle cx="0" cy="-38" r="16" fill="none" stroke="currentColor" stroke-width="2.5"/>
+            <circle cx="33" cy="19" r="16" fill="none" stroke="currentColor" stroke-width="2.5"/>
+            <circle cx="-33" cy="19" r="16" fill="none" stroke="currentColor" stroke-width="2.5"/>
           </g>
         </g>
 
         <!-- Triangle 2: upper-left (120 deg) -->
         <g transform="rotate(-120)" class={activeTriangle === 2 ? 'tri-active' : ''}>
           <g transform="translate(300, 0) rotate(90)">
-            <polygon points="0,-90 78,45 -78,45" fill="none" stroke="white" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
-            <circle cx="0" cy="-38" r="16" fill="none" stroke="white" stroke-width="2.5"/>
-            <circle cx="33" cy="19" r="16" fill="none" stroke="white" stroke-width="2.5"/>
-            <circle cx="-33" cy="19" r="16" fill="none" stroke="white" stroke-width="2.5"/>
+            <polygon points="0,-90 78,45 -78,45" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+            <circle cx="0" cy="-38" r="16" fill="none" stroke="currentColor" stroke-width="2.5"/>
+            <circle cx="33" cy="19" r="16" fill="none" stroke="currentColor" stroke-width="2.5"/>
+            <circle cx="-33" cy="19" r="16" fill="none" stroke="currentColor" stroke-width="2.5"/>
           </g>
         </g>
 
         <!-- Triangle 3: left (180 deg) -->
         <g transform="rotate(-180)" class={activeTriangle === 3 ? 'tri-active' : ''}>
           <g transform="translate(300, 0) rotate(90)">
-            <polygon points="0,-90 78,45 -78,45" fill="none" stroke="white" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
-            <circle cx="0" cy="-38" r="16" fill="none" stroke="white" stroke-width="2.5"/>
-            <circle cx="33" cy="19" r="16" fill="none" stroke="white" stroke-width="2.5"/>
-            <circle cx="-33" cy="19" r="16" fill="none" stroke="white" stroke-width="2.5"/>
+            <polygon points="0,-90 78,45 -78,45" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+            <circle cx="0" cy="-38" r="16" fill="none" stroke="currentColor" stroke-width="2.5"/>
+            <circle cx="33" cy="19" r="16" fill="none" stroke="currentColor" stroke-width="2.5"/>
+            <circle cx="-33" cy="19" r="16" fill="none" stroke="currentColor" stroke-width="2.5"/>
           </g>
         </g>
 
         <!-- Triangle 4: lower-left (240 deg) -->
         <g transform="rotate(-240)" class={activeTriangle === 4 ? 'tri-active' : ''}>
           <g transform="translate(300, 0) rotate(90)">
-            <polygon points="0,-90 78,45 -78,45" fill="none" stroke="white" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
-            <circle cx="0" cy="-38" r="16" fill="none" stroke="white" stroke-width="2.5"/>
-            <circle cx="33" cy="19" r="16" fill="none" stroke="white" stroke-width="2.5"/>
-            <circle cx="-33" cy="19" r="16" fill="none" stroke="white" stroke-width="2.5"/>
+            <polygon points="0,-90 78,45 -78,45" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+            <circle cx="0" cy="-38" r="16" fill="none" stroke="currentColor" stroke-width="2.5"/>
+            <circle cx="33" cy="19" r="16" fill="none" stroke="currentColor" stroke-width="2.5"/>
+            <circle cx="-33" cy="19" r="16" fill="none" stroke="currentColor" stroke-width="2.5"/>
           </g>
         </g>
 
         <!-- Triangle 5: lower-right (300 deg) -->
         <g transform="rotate(-300)" class={activeTriangle === 5 ? 'tri-active' : ''}>
           <g transform="translate(300, 0) rotate(90)">
-            <polygon points="0,-90 78,45 -78,45" fill="none" stroke="white" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
-            <circle cx="0" cy="-38" r="16" fill="none" stroke="white" stroke-width="2.5"/>
-            <circle cx="33" cy="19" r="16" fill="none" stroke="white" stroke-width="2.5"/>
-            <circle cx="-33" cy="19" r="16" fill="none" stroke="white" stroke-width="2.5"/>
+            <polygon points="0,-90 78,45 -78,45" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+            <circle cx="0" cy="-38" r="16" fill="none" stroke="currentColor" stroke-width="2.5"/>
+            <circle cx="33" cy="19" r="16" fill="none" stroke="currentColor" stroke-width="2.5"/>
+            <circle cx="-33" cy="19" r="16" fill="none" stroke="currentColor" stroke-width="2.5"/>
           </g>
         </g>
 
         <!-- Connecting ring + spokes -->
-        <circle cx="0" cy="0" r="215" fill="none" stroke="white" stroke-width="1" stroke-dasharray="8 16" opacity="0.45"/>
-        <circle cx="0" cy="0" r="390" fill="none" stroke="white" stroke-width="0.7" stroke-dasharray="4 20" opacity="0.25"/>
-        <line x1="0" y1="0" x2="210" y2="0" stroke="white" stroke-width="0.8" stroke-linecap="round" opacity="0.22"/>
-        <line x1="0" y1="0" x2="105" y2="-182" stroke="white" stroke-width="0.8" stroke-linecap="round" opacity="0.22"/>
-        <line x1="0" y1="0" x2="-105" y2="-182" stroke="white" stroke-width="0.8" stroke-linecap="round" opacity="0.22"/>
-        <line x1="0" y1="0" x2="-210" y2="0" stroke="white" stroke-width="0.8" stroke-linecap="round" opacity="0.22"/>
-        <line x1="0" y1="0" x2="-105" y2="182" stroke="white" stroke-width="0.8" stroke-linecap="round" opacity="0.22"/>
-        <line x1="0" y1="0" x2="105" y2="182" stroke="white" stroke-width="0.8" stroke-linecap="round" opacity="0.22"/>
-        <circle cx="0" cy="0" r="8" fill="none" stroke="white" stroke-width="2" opacity="0.55"/>
-        <circle cx="0" cy="0" r="3" fill="white" opacity="0.5"/>
+        <circle cx="0" cy="0" r="215" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="8 16" opacity="0.45"/>
+        <circle cx="0" cy="0" r="390" fill="none" stroke="currentColor" stroke-width="0.7" stroke-dasharray="4 20" opacity="0.25"/>
+        <line x1="0" y1="0" x2="210" y2="0" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" opacity="0.22"/>
+        <line x1="0" y1="0" x2="105" y2="-182" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" opacity="0.22"/>
+        <line x1="0" y1="0" x2="-105" y2="-182" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" opacity="0.22"/>
+        <line x1="0" y1="0" x2="-210" y2="0" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" opacity="0.22"/>
+        <line x1="0" y1="0" x2="-105" y2="182" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" opacity="0.22"/>
+        <line x1="0" y1="0" x2="105" y2="182" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" opacity="0.22"/>
+        <circle cx="0" cy="0" r="8" fill="none" stroke="currentColor" stroke-width="2" opacity="0.55"/>
+        <circle cx="0" cy="0" r="3" fill="currentColor" opacity="0.5"/>
 
       </g>
     </svg>
@@ -582,7 +582,7 @@ Acceptance Criteria:
         <div class="trail trail-3"></div>
       </div>
       <svg class="agent-svg" viewBox="0 0 1 1" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-        <circle cx="0.5" cy="0.5" r="0.42" fill="none" stroke="white" stroke-width="0.1"/>
+        <circle cx="0.5" cy="0.5" r="0.42" fill="none" stroke="currentColor" stroke-width="0.1"/>
       </svg>
     </div>
   {/each}
@@ -897,19 +897,7 @@ Acceptance Criteria:
     scroll-behavior: smooth;
   }
 
-  /* ─── Semantic CSS Variables (fallback defaults — theme.css overrides) ── */
-  :global(:root) {
-    --bg-primary:    #0a0a0a;
-    --bg-secondary:  #0f0f0f;
-    --bg-tertiary:   #000000;
-    --text-primary:  #ffffff;
-    --text-secondary:#888888;
-    --text-tertiary: #444444;
-    --border-color:  rgba(255,255,255,0.07);
-    --border-subtle: rgba(255,255,255,0.05);
-    --accent-primary: rgba(255,255,255,0.35);
-    --accent-hover:   rgba(255,255,255,0.70);
-  }
+  /* Theme variables come from lib/theme.css — do NOT duplicate here */
 
   /* ─── Root ────────────────────────────────────────────────────────────── */
   .landing {
@@ -929,7 +917,7 @@ Acceptance Criteria:
     left: 0;
     right: 0;
     z-index: 100;
-    background: rgba(10, 10, 10, 0.88);
+    background: color-mix(in srgb, var(--bg-primary) 88%, transparent);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     border-bottom: 1px solid var(--border-color);
@@ -958,7 +946,7 @@ Acceptance Criteria:
     width: 28px;
     height: 28px;
     object-fit: contain;
-    border: 1px solid rgba(255,255,255,0.1);
+    border: 1px solid var(--line-subtle);
     border-radius: 2px;
   }
 
@@ -993,7 +981,7 @@ Acceptance Criteria:
 
   .nav-link:hover {
     color: var(--text-primary);
-    background: rgba(255,255,255,0.05);
+    background: var(--hover-tint);
   }
 
   .nav-actions {
@@ -1020,7 +1008,7 @@ Acceptance Criteria:
 
   .nav-signin:hover {
     border-color: var(--accent-hover);
-    background: rgba(255,255,255,0.05);
+    background: var(--hover-tint);
   }
 
   /* ─── Hamburger ─────────────────────────────────────────────────────────── */
@@ -1033,7 +1021,7 @@ Acceptance Criteria:
     width: 36px;
     height: 36px;
     background: none;
-    border: 1px solid rgba(255,255,255,0.15);
+    border: 1px solid var(--line-medium);
     border-radius: 2px;
     cursor: pointer;
     padding: 0;
@@ -1043,11 +1031,11 @@ Acceptance Criteria:
     display: block;
     width: 16px;
     height: 1px;
-    background: #ffffff;
+    background: var(--text-primary);
   }
 
   .hamburger:hover {
-    border-color: rgba(255,255,255,0.35);
+    border-color: var(--line-strong);
   }
 
   /* ─── Mobile Menu ───────────────────────────────────────────────────────── */
@@ -1055,7 +1043,7 @@ Acceptance Criteria:
     position: fixed;
     inset: 0;
     z-index: 200;
-    background: rgba(0,0,0,0.65);
+    background: var(--overlay-bg);
     backdrop-filter: blur(4px);
   }
 
@@ -1118,7 +1106,7 @@ Acceptance Criteria:
     transition: background 150ms ease;
   }
 
-  .mobile-signin:hover { background: rgba(255,255,255,0.05); }
+  .mobile-signin:hover { background: var(--hover-tint); }
 
   .mobile-theme-row {
     display: flex;
@@ -1145,6 +1133,7 @@ Acceptance Criteria:
     z-index: 0;
     pointer-events: none;
     overflow: hidden;
+    color: var(--text-primary);
   }
 
   .wheel-svg {
@@ -1163,7 +1152,7 @@ Acceptance Criteria:
   }
 
   .wheel-svg .tri-active {
-    filter: brightness(8) drop-shadow(0 0 6px white);
+    filter: brightness(8) drop-shadow(0 0 6px var(--text-primary));
     transition: filter 0.1s ease;
   }
 
@@ -1191,7 +1180,7 @@ Acceptance Criteria:
     position: absolute;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    filter: drop-shadow(0 0 2px rgba(255,255,255,0.25));
+    filter: drop-shadow(0 0 2px var(--trail-color));
   }
 
   .agent-trails {
@@ -1223,7 +1212,7 @@ Acceptance Criteria:
 
   .trail {
     height: 1px;
-    background: linear-gradient(to left, rgba(255,255,255,0.25), transparent);
+    background: linear-gradient(to left, var(--trail-color), transparent);
     border-radius: 1px;
   }
   .trail-1 { width: 22px; }
@@ -1262,7 +1251,7 @@ Acceptance Criteria:
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid rgba(255,255,255,0.1);
+    border: 1px solid var(--line-subtle);
     border-radius: 2px;
     overflow: hidden;
   }
@@ -1282,7 +1271,7 @@ Acceptance Criteria:
     text-transform: uppercase;
     color: var(--text-primary);
     margin: 0 0 20px;
-    text-shadow: 0 0 40px rgba(255,255,255,0.08);
+    text-shadow: 0 0 40px var(--hover-tint-strong);
   }
 
   .tagline-primary {
@@ -1332,12 +1321,12 @@ Acceptance Criteria:
   }
 
   .btn-github:hover {
-    background: rgba(255,255,255,0.05);
+    background: var(--hover-tint);
     border-color: var(--accent-hover);
-    box-shadow: 0 0 20px rgba(255,255,255,0.08);
+    box-shadow: 0 0 20px var(--hover-tint-strong);
   }
 
-  .btn-github:active { background: rgba(255,255,255,0.08); }
+  .btn-github:active { background: var(--hover-tint-strong); }
 
   .btn-github-large {
     width: auto;
@@ -1428,7 +1417,7 @@ Acceptance Criteria:
   }
 
   /* ─── The Problem ───────────────────────────────────────────────────────── */
-  .section-problem { background: rgba(0,0,0,0.25); }
+  .section-problem { background: var(--section-tint); }
 
   .problem-content { max-width: 680px; }
 
@@ -1536,7 +1525,7 @@ Acceptance Criteria:
     transition: background 150ms ease;
   }
 
-  .why-card:hover { background: rgba(255,255,255,0.02); }
+  .why-card:hover { background: var(--active-tint); }
 
   .why-icon { color: var(--text-tertiary); line-height: 0; margin-bottom: 4px; }
 
@@ -1650,7 +1639,7 @@ Acceptance Criteria:
   }
 
   .usecase-contract {
-    background: rgba(255,255,255,0.025);
+    background: var(--active-tint);
     border: 1px solid var(--border-color);
     border-radius: 2px;
     overflow: hidden;
@@ -1716,7 +1705,7 @@ Acceptance Criteria:
     transition: background 150ms ease;
   }
 
-  .pricing-tier:hover { background: rgba(255,255,255,0.02); }
+  .pricing-tier:hover { background: var(--active-tint); }
 
   .tier-icon { color: var(--text-tertiary); line-height: 0; margin-bottom: 4px; }
 
@@ -1879,7 +1868,7 @@ Acceptance Criteria:
   /* ─── Final CTA ─────────────────────────────────────────────────────────── */
   .section-cta {
     text-align: center;
-    background: rgba(0,0,0,0.25);
+    background: var(--section-tint);
   }
 
   .cta-inner {
@@ -1999,7 +1988,7 @@ Acceptance Criteria:
     .section-header { margin-bottom: 36px; }
 
     .steps-grid { grid-template-columns: 1fr; }
-    .step-card { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .step-card { border-right: none; border-bottom: 1px solid var(--border-color); }
     .step-card:last-child { border-bottom: none; }
 
     .why-grid { grid-template-columns: 1fr; }

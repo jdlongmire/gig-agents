@@ -20,6 +20,18 @@
 
   --shadow:    0 2px 8px rgba(0, 0, 0, 0.5);
   --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.7);
+
+  /* Interaction layers — subtle tints that adapt to theme */
+  --hover-tint:       rgba(255, 255, 255, 0.05);
+  --hover-tint-strong: rgba(255, 255, 255, 0.08);
+  --active-tint:      rgba(255, 255, 255, 0.02);
+  --overlay-bg:       rgba(0, 0, 0, 0.65);
+  --section-tint:     rgba(0, 0, 0, 0.25);
+  --glow-color:       rgba(255, 255, 255, 0.08);
+  --line-subtle:      rgba(255, 255, 255, 0.1);
+  --line-medium:      rgba(255, 255, 255, 0.15);
+  --line-strong:      rgba(255, 255, 255, 0.35);
+  --trail-color:      rgba(255, 255, 255, 0.25);
 }
 
 /* ── Light theme ──────────────────────────────────────────── */
@@ -41,6 +53,18 @@
 
   --shadow:    0 2px 8px rgba(0, 0, 0, 0.08);
   --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.12);
+
+  /* Interaction layers — inverted for light theme */
+  --hover-tint:       rgba(0, 0, 0, 0.05);
+  --hover-tint-strong: rgba(0, 0, 0, 0.08);
+  --active-tint:      rgba(0, 0, 0, 0.02);
+  --overlay-bg:       rgba(255, 255, 255, 0.75);
+  --section-tint:     rgba(0, 0, 0, 0.04);
+  --glow-color:       rgba(0, 0, 0, 0.06);
+  --line-subtle:      rgba(0, 0, 0, 0.1);
+  --line-medium:      rgba(0, 0, 0, 0.15);
+  --line-strong:      rgba(0, 0, 0, 0.35);
+  --trail-color:      rgba(0, 0, 0, 0.2);
 }
 
 /* ── Component tokens (theme-independent) ─────────────────── */
