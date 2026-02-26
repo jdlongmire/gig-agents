@@ -1,0 +1,9 @@
+.git
+*.db
+.env
+node_modules
+web/node_modules
+bin/
+docs/
+marketing/
+specs/
