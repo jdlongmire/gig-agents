@@ -245,9 +245,9 @@
               stroke-width="1.5"
               stroke-linejoin="round"
             />
-            <circle cx="0" cy="-60" r="7" fill="none" stroke="white" stroke-width="1.2"/>
-            <circle cx="52" cy="30" r="7" fill="none" stroke="white" stroke-width="1.2"/>
-            <circle cx="-52" cy="30" r="7" fill="none" stroke="white" stroke-width="1.2"/>
+            <circle cx="0" cy="-38" r="16" fill="none" stroke="white" stroke-width="1.5"/>
+            <circle cx="33" cy="19" r="16" fill="none" stroke="white" stroke-width="1.5"/>
+            <circle cx="-33" cy="19" r="16" fill="none" stroke="white" stroke-width="1.5"/>
           </g>
         </g>
 
@@ -261,9 +261,9 @@
               stroke-width="1.5"
               stroke-linejoin="round"
             />
-            <circle cx="0" cy="-60" r="7" fill="none" stroke="white" stroke-width="1.2"/>
-            <circle cx="52" cy="30" r="7" fill="none" stroke="white" stroke-width="1.2"/>
-            <circle cx="-52" cy="30" r="7" fill="none" stroke="white" stroke-width="1.2"/>
+            <circle cx="0" cy="-38" r="16" fill="none" stroke="white" stroke-width="1.5"/>
+            <circle cx="33" cy="19" r="16" fill="none" stroke="white" stroke-width="1.5"/>
+            <circle cx="-33" cy="19" r="16" fill="none" stroke="white" stroke-width="1.5"/>
           </g>
         </g>
 
@@ -277,9 +277,9 @@
               stroke-width="1.5"
               stroke-linejoin="round"
             />
-            <circle cx="0" cy="-60" r="7" fill="none" stroke="white" stroke-width="1.2"/>
-            <circle cx="52" cy="30" r="7" fill="none" stroke="white" stroke-width="1.2"/>
-            <circle cx="-52" cy="30" r="7" fill="none" stroke="white" stroke-width="1.2"/>
+            <circle cx="0" cy="-38" r="16" fill="none" stroke="white" stroke-width="1.5"/>
+            <circle cx="33" cy="19" r="16" fill="none" stroke="white" stroke-width="1.5"/>
+            <circle cx="-33" cy="19" r="16" fill="none" stroke="white" stroke-width="1.5"/>
           </g>
         </g>
 
@@ -293,9 +293,9 @@
               stroke-width="1.5"
               stroke-linejoin="round"
             />
-            <circle cx="0" cy="-60" r="7" fill="none" stroke="white" stroke-width="1.2"/>
-            <circle cx="52" cy="30" r="7" fill="none" stroke="white" stroke-width="1.2"/>
-            <circle cx="-52" cy="30" r="7" fill="none" stroke="white" stroke-width="1.2"/>
+            <circle cx="0" cy="-38" r="16" fill="none" stroke="white" stroke-width="1.5"/>
+            <circle cx="33" cy="19" r="16" fill="none" stroke="white" stroke-width="1.5"/>
+            <circle cx="-33" cy="19" r="16" fill="none" stroke="white" stroke-width="1.5"/>
           </g>
         </g>
 
@@ -309,9 +309,9 @@
               stroke-width="1.5"
               stroke-linejoin="round"
             />
-            <circle cx="0" cy="-60" r="7" fill="none" stroke="white" stroke-width="1.2"/>
-            <circle cx="52" cy="30" r="7" fill="none" stroke="white" stroke-width="1.2"/>
-            <circle cx="-52" cy="30" r="7" fill="none" stroke="white" stroke-width="1.2"/>
+            <circle cx="0" cy="-38" r="16" fill="none" stroke="white" stroke-width="1.5"/>
+            <circle cx="33" cy="19" r="16" fill="none" stroke="white" stroke-width="1.5"/>
+            <circle cx="-33" cy="19" r="16" fill="none" stroke="white" stroke-width="1.5"/>
           </g>
         </g>
 
@@ -325,9 +325,9 @@
               stroke-width="1.5"
               stroke-linejoin="round"
             />
-            <circle cx="0" cy="-60" r="7" fill="none" stroke="white" stroke-width="1.2"/>
-            <circle cx="52" cy="30" r="7" fill="none" stroke="white" stroke-width="1.2"/>
-            <circle cx="-52" cy="30" r="7" fill="none" stroke="white" stroke-width="1.2"/>
+            <circle cx="0" cy="-38" r="16" fill="none" stroke="white" stroke-width="1.5"/>
+            <circle cx="33" cy="19" r="16" fill="none" stroke="white" stroke-width="1.5"/>
+            <circle cx="-33" cy="19" r="16" fill="none" stroke="white" stroke-width="1.5"/>
           </g>
         </g>
 
