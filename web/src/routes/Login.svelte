@@ -1262,6 +1262,13 @@ Acceptance Criteria:
     gap: 40px;
     width: 100%;
     max-width: 520px;
+    position: relative;
+    background: color-mix(in srgb, var(--bg-primary) 80%, transparent);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-radius: 16px;
+    padding: 56px 40px;
+    border: 1px solid var(--border-subtle);
   }
 
   .logo-wrap {
@@ -1402,6 +1409,13 @@ Acceptance Criteria:
   .section-inner {
     max-width: 1100px;
     margin: 0 auto;
+    position: relative;
+    background: color-mix(in srgb, var(--bg-primary) 85%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 12px;
+    padding: 48px 40px;
+    border: 1px solid var(--border-subtle);
   }
 
   .section-header {
@@ -2002,7 +2016,9 @@ Acceptance Criteria:
       opacity: 0.25;
     }
 
-    .section { padding: 72px 20px; }
+    .section { padding: 72px 16px; }
+    .section-inner { padding: 32px 24px; }
+    .hero-inner { padding: 40px 24px; }
     .section-title { font-size: 22px; }
     .section-header { margin-bottom: 36px; }
 
@@ -2036,7 +2052,8 @@ Acceptance Criteria:
     .tagline-primary { font-size: 16px; }
     .logo-wrap { width: 150px; height: 84px; }
     .hero { padding: 72px 20px 48px; }
-    .hero-inner { gap: 30px; }
+    .hero-inner { gap: 30px; padding: 32px 18px; }
+    .section-inner { padding: 28px 18px; }
     .section-title { font-size: 19px; }
     .problem-intro { font-size: 16px; }
 
