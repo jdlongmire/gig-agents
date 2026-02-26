@@ -615,23 +615,17 @@
 
   /*
     Motion trail lines.
-    During the OUTBOUND leg (0%→38%), the circle moves rightward — trails extend leftward
-    (behind the circle in the direction of travel).
-    During the RETURN leg (55%→100%), the circle moves leftward — trails should extend
-    rightward. We achieve this by scaling the trail container to -1 on the X axis,
-    which mirrors the gradient so it fades in the correct direction, and repositioning
-    it to the right of the circle.
+    The agent-fly path changes direction at 38% (peak). Trails must flip
+    to match: LEFT of circle during outbound (0→36%), invisible during
+    the turn (36→42%), RIGHT of circle during return (42→92%).
 
-    Layout:
-      .agent-trails is positioned relative to the agent-particle div.
-      Outbound: right: 100% of parent (trails to the left of the circle)
-      Return:   left:  100% of parent (trails to the right of the circle)
-    We animate via `left` switching (handled in keyframes via translate).
+    Positioning: trails start at right:100% (left of circle). To flip
+    to the right side we use translateX with calc() based on the parent
+    width (the circle, 10-16px). scaleX(-1) mirrors the gradient.
   */
   .agent-trails {
     position: absolute;
     top: 50%;
-    /* Start on the LEFT side of the circle (outbound mode) */
     right: 100%;
     left: auto;
     transform: translateY(-50%);
@@ -647,26 +641,21 @@
 
   @keyframes trail-flip {
     /*
-      Strategy: position the trail div using translateX.
-      Outbound (0→35%): translateX(0) — stays on the LEFT (right:100% is the base position)
-      Transition (42→58%): shrink to near-zero so the flip is invisible, then jump
-      Return (65→100%): we can't easily switch from right:100% to left:100% in keyframes,
-        so instead we use a large negative translateX to jump the trails to the right of
-        the circle. The circle is ~16px wide. From right:100% position, moving by
-        calc(100% + 100% + 16px) would put us to the right side. We use a fixed offset
-        in vw since the parent is fixed-size. Since .agent-trails is ~22px wide and the
-        circle is 10-16px, we need roughly +200% of trail width + circle width to jump right.
-        We use scaleX(-1) to flip the gradient direction too.
+      Aligned to agent-fly direction changes:
+        0-36%:  outbound — trails on LEFT (right:100% base position)
+        36-42%: turning — trails shrink to zero (invisible during direction change)
+        42-92%: return — trails jump to RIGHT side via translateX, scaleX(-1) flips gradient
+        92-100%: docking — trails fade out
     */
     0%   { transform: translateY(-50%) scaleX(1);    opacity: 1; }
-    35%  { transform: translateY(-50%) scaleX(1);    opacity: 1; }
-    44%  { transform: translateY(-50%) scaleX(0.05); opacity: 0.2; }
-    /* At 50%: jump to right side while invisible (scaleX near 0) */
-    50%  { transform: translateY(-50%) translateX(calc(200% + 24px)) scaleX(-0.05); opacity: 0.2; }
-    60%  { transform: translateY(-50%) translateX(calc(200% + 24px)) scaleX(-1);   opacity: 0.8; }
-    88%  { transform: translateY(-50%) translateX(calc(200% + 24px)) scaleX(-1);   opacity: 0.8; }
-    95%  { transform: translateY(-50%) translateX(calc(200% + 24px)) scaleX(-0.3); opacity: 0.2; }
-    100% { transform: translateY(-50%) translateX(calc(200% + 24px)) scaleX(0);    opacity: 0; }
+    32%  { transform: translateY(-50%) scaleX(1);    opacity: 1; }
+    36%  { transform: translateY(-50%) scaleX(0);    opacity: 0; }
+    /* Jump to right side while invisible — 200% of trail width + circle width */
+    42%  { transform: translateY(-50%) translateX(calc(200% + 20px)) scaleX(0);   opacity: 0; }
+    48%  { transform: translateY(-50%) translateX(calc(200% + 20px)) scaleX(-1);  opacity: 0.8; }
+    86%  { transform: translateY(-50%) translateX(calc(200% + 20px)) scaleX(-1);  opacity: 0.8; }
+    92%  { transform: translateY(-50%) translateX(calc(200% + 20px)) scaleX(-0.3); opacity: 0.2; }
+    100% { transform: translateY(-50%) translateX(calc(200% + 20px)) scaleX(0);    opacity: 0; }
   }
 
   .trail {
