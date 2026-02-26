@@ -12,16 +12,22 @@
     <link rel="icon" type="image/jpeg" href="assets/crewport-logo.jpeg">
     <style>
         :root {
-            --bg-dark: #0d1117;
-            --bg-card: #161b22;
-            --bg-hero: #0a0c10;
-            --border: #30363d;
-            --text-primary: #e6edf3;
-            --text-secondary: #8b949e;
-            --accent-blue: #58a6ff;
-            --accent-green: #3fb950;
-            --accent-purple: #a371f7;
-            --accent-orange: #f0883e;
+            /* Logo palette - warm professional tones */
+            --bg-dark: #1a1f1c;
+            --bg-card: #242a26;
+            --bg-hero: #151915;
+            --border: #3d4a42;
+            --text-primary: #f5ede3;
+            --text-secondary: #a8a092;
+            --accent-teal: #5c7a6e;
+            --accent-gold: #d4a84b;
+            --accent-cream: #e8ddd0;
+            --accent-sage: #7a9688;
+            /* Aliases for existing code */
+            --accent-blue: #5c7a6e;
+            --accent-green: #d4a84b;
+            --accent-purple: #7a9688;
+            --accent-orange: #c9935a;
         }
 
         * {
@@ -51,7 +57,7 @@
             top: 0;
             left: 0;
             right: 0;
-            background: rgba(13, 17, 23, 0.95);
+            background: rgba(26, 31, 28, 0.95);
             backdrop-filter: blur(10px);
             z-index: 1000;
         }
@@ -125,14 +131,14 @@
         }
 
         .btn-primary {
-            background: var(--accent-green);
-            color: #000;
+            background: var(--accent-gold);
+            color: #1a1f1c;
             border: none;
             font-weight: 600;
         }
 
         .btn-primary:hover {
-            background: #46c453;
+            background: #e0b55a;
             transform: translateY(-1px);
         }
 
@@ -153,8 +159,8 @@
             right: 0;
             bottom: 0;
             background:
-                linear-gradient(135deg, rgba(88, 166, 255, 0.1) 0%, transparent 50%),
-                linear-gradient(225deg, rgba(163, 113, 247, 0.1) 0%, transparent 50%);
+                linear-gradient(135deg, rgba(92, 122, 110, 0.15) 0%, transparent 50%),
+                linear-gradient(225deg, rgba(212, 168, 75, 0.1) 0%, transparent 50%);
             pointer-events: none;
         }
 
@@ -172,7 +178,7 @@
         }
 
         .hero h1 .highlight {
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-sage));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -219,7 +225,7 @@
         .stat-number {
             font-size: 32px;
             font-weight: 700;
-            color: var(--accent-blue);
+            color: var(--accent-gold);
         }
 
         .stat-label {
@@ -263,8 +269,8 @@
         }
 
         .comparison-header.highlight {
-            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
-            color: white;
+            background: linear-gradient(135deg, var(--accent-teal), var(--accent-sage));
+            color: var(--accent-cream);
         }
 
         .comparison-row {
@@ -286,7 +292,7 @@
         }
 
         .check {
-            color: var(--accent-green);
+            color: var(--accent-gold);
             font-size: 20px;
         }
 
@@ -329,7 +335,7 @@
 
         .value-card:hover {
             transform: translateY(-4px);
-            border-color: var(--accent-blue);
+            border-color: var(--accent-gold);
         }
 
         .value-icon {
@@ -405,7 +411,7 @@
         }
 
         .price-compare .new {
-            color: var(--accent-green);
+            color: var(--accent-gold);
             font-weight: 600;
         }
 
@@ -428,7 +434,7 @@
         }
 
         .cta-card:hover {
-            border-color: var(--accent-purple);
+            border-color: var(--accent-gold);
         }
 
         .cta-icon {
@@ -463,18 +469,18 @@
 
         .cta-card li::before {
             content: "✓";
-            color: var(--accent-green);
+            color: var(--accent-gold);
             font-weight: bold;
         }
 
         .btn-purple {
-            background: var(--accent-purple);
-            color: #fff;
+            background: var(--accent-teal);
+            color: var(--accent-cream);
             border: none;
         }
 
         .btn-purple:hover {
-            background: #b485f7;
+            background: #6d8b7f;
         }
 
         .btn-orange {
@@ -519,8 +525,8 @@
             width: 48px;
             height: 48px;
             border-radius: 50%;
-            background: var(--accent-blue);
-            color: #000;
+            background: var(--accent-gold);
+            color: #1a1f1c;
             font-size: 20px;
             font-weight: 700;
             display: flex;
@@ -541,31 +547,33 @@
         /* CTA Banner */
         .cta-banner {
             padding: 80px 0;
-            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            background: linear-gradient(135deg, var(--accent-teal), #4a6359);
             text-align: center;
         }
 
         .cta-banner h2 {
             font-size: 36px;
             margin-bottom: 16px;
-            color: white;
+            color: var(--accent-cream);
         }
 
         .cta-banner p {
             font-size: 18px;
             margin-bottom: 32px;
             opacity: 0.9;
+            color: var(--accent-cream);
         }
 
         .cta-banner .btn {
-            background: white;
-            color: var(--accent-purple);
+            background: var(--accent-gold);
+            color: #1a1f1c;
             font-weight: 600;
         }
 
         .cta-banner .btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+            background: #e0b55a;
         }
 
         /* Footer */
@@ -578,7 +586,7 @@
         }
 
         footer a {
-            color: var(--accent-blue);
+            color: var(--accent-gold);
             text-decoration: none;
         }
 
