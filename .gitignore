@@ -1,0 +1,46 @@
+# Binaries
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Build output
+/build/
+/dist/
+/bin/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Dependencies
+vendor/
+__pycache__/
+*.pyc
+node_modules/
+web/node_modules/
+
+# Frontend build output (generated)
+web/dist/
+
+# Test
+coverage.out
+*.test
+
+# CrewPort specific
+*.db
+*.db-shm
+*.db-wal
+web/node_modules/
+web/.svelte-kit/
