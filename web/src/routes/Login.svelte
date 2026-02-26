@@ -14,6 +14,25 @@
     return unsub;
   });
 
+  // ─── Theme-aware logo ────────────────────────────────────────────────────
+  let logoSrc = '/assets/crewport-logo-light.jpg';
+  let observer;
+
+  function updateLogo() {
+    const theme = document.documentElement.getAttribute('data-theme');
+    logoSrc = theme === 'dark' ? '/assets/crewport-logo.jpg' : '/assets/crewport-logo-light.jpg';
+  }
+
+  onMount(() => {
+    updateLogo();
+    observer = new MutationObserver(updateLogo);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  });
+
+  onDestroy(() => {
+    if (observer) observer.disconnect();
+  });
+
   // ─── Nav State ────────────────────────────────────────────────────────────
   let mobileMenuOpen = false;
 
@@ -434,7 +453,7 @@ Acceptance Criteria:
 
       <!-- Left: Logo + Wordmark -->
       <a class="nav-brand" href="/" on:click|preventDefault={() => scrollTo('hero')}>
-        <img src="/assets/crewport-logo.jpg" alt="CrewPort" class="nav-logo" />
+        <img src={logoSrc} alt="CrewPort" class="nav-logo" />
         <span class="nav-wordmark">CREWPORT</span>
       </a>
 
@@ -595,7 +614,7 @@ Acceptance Criteria:
       <div class="hero-inner">
 
         <div class="logo-wrap">
-          <img src="/assets/crewport-logo.jpg" alt="CrewPort" class="logo" />
+          <img src={logoSrc} alt="CrewPort" class="logo" />
         </div>
 
         <div class="hero-text">

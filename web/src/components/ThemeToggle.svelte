@@ -1,7 +1,7 @@
 <script>
   import { onMount } from 'svelte';
 
-  let isDark = true;
+  let isDark = false;
 
   onMount(() => {
     // Read the theme already set by main.js (no flash)

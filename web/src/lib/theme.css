@@ -1,8 +1,7 @@
 /* CrewPort Theme — Monochrome */
 
-/* ── Dark theme (default) ─────────────────────────────────── */
+/* ── Dark theme ───────────────────────────────────────────── */
 
-:root,
 [data-theme="dark"] {
   --bg-primary:   #0a0a0a;
   --bg-secondary: #0f0f0f;
@@ -34,8 +33,9 @@
   --trail-color:      rgba(255, 255, 255, 0.25);
 }
 
-/* ── Light theme ──────────────────────────────────────────── */
+/* ── Light theme (default) ────────────────────────────────── */
 
+:root,
 [data-theme="light"] {
   --bg-primary:   #fafafa;
   --bg-secondary: #f0f0f0;

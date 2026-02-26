@@ -1,4 +1,5 @@
 <script>
+  import { onMount, onDestroy } from 'svelte';
   import { location } from 'svelte-spa-router';
 
   export let collapsed = false;
@@ -13,12 +14,31 @@
   function isActive(href) {
     return $location === href || ($location === '/' && href === '/dashboard');
   }
+
+  // Theme-aware logo
+  let logoSrc = '/assets/crewport-logo-light.jpg';
+  let observer;
+
+  function updateLogo() {
+    const theme = document.documentElement.getAttribute('data-theme');
+    logoSrc = theme === 'dark' ? '/assets/crewport-logo.jpg' : '/assets/crewport-logo-light.jpg';
+  }
+
+  onMount(() => {
+    updateLogo();
+    observer = new MutationObserver(updateLogo);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  });
+
+  onDestroy(() => {
+    if (observer) observer.disconnect();
+  });
 </script>
 
 <aside class="sidebar" class:collapsed>
   <!-- Logo / Brand -->
   <div class="sidebar-brand">
-    <img src="/assets/crewport-logo.jpg" alt="CrewPort" class="brand-logo" />
+    <img src={logoSrc} alt="CrewPort" class="brand-logo" />
     {#if !collapsed}
       <span class="brand-name">CrewPort</span>
     {/if}

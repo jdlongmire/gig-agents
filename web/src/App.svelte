@@ -73,6 +73,11 @@
   $: isAuthenticated = $auth.isAuthenticated;
   $: loading = $auth.loading;
 
+  // Theme-aware logo
+  $: bootLogo = (typeof document !== 'undefined' && document.documentElement.getAttribute('data-theme') === 'dark')
+    ? '/assets/crewport-logo.jpg'
+    : '/assets/crewport-logo-light.jpg';
+
   // Current route needs layout wrapper
   let currentRouteNeedsLayout = false;
 
@@ -88,7 +93,7 @@
 {#if loading}
   <!-- Boot splash -->
   <div class="boot-screen">
-    <img src="/assets/crewport-logo.jpg" alt="CrewPort" class="boot-logo" />
+    <img src={bootLogo} alt="CrewPort" class="boot-logo" />
     <div class="boot-spinner"></div>
   </div>
 {:else if isAuthenticated}
